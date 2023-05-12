@@ -1,0 +1,89 @@
+GAME MECHANICS OVERVIEW
+
+Character skills will be modified by the various weapons in use and force powers that have been activated.
+
+A base character should have a total of 125 skill points distributed between their various skills.   
+I would suggest having base skills reflecting the character's attributes in line with who they are (eg Darth Maul very strong).
+They will also have 50 base health points at level 1
+
+Characters will receive experience points during after combat based on:
+1) the relative strength of their opponent (the stronger the more points they get)
+2) hits landed
+3) hits taken
+4) result of the fight
+
+After accumulating experience points these can be spent on:
+1) Levelling up (accumulate enough a character can level up, receiving additional skill points they can allocate to their base stats
+                PLUS an additional force power slot, and their health increases)
+2) Force powers (powers that can be used to provide buffs to certain skills or provide one-off effects, to be used once per fight)
+
+
+THE CHARACTER SHEET
+
+Affiliation - determines the type of force powers available
+STRENGTH  - affects the damage done by attacks
+Weapon Skill - affects the likelihood of landing a successful blow
+Agility - Affects the likelihood of avoiding a blow (combines with weapon skill of opponent)
+Speed - Affects the time the character has per turn
+Vitality - affects the numebr of health points a character has
+
+SPEED POINTS
+
+A characters speed will determine how many acts they can carry out per turn.  When they run out, their turn is over.
+
+Base speed points: 50
+Quick attack: 15 points (-50% effectiveness)
+Normal Attack: 25 points (no modofier)
+Power Attack: 40 points (+50% modifier)
+Use minor force power: 15 points
+Use major force power: 25 points
+Use ultimate force power: 40 points
+
+
+CHARACTER ATTRIBUTE MECHANICS
+
+Based on 125 skill points, a balanced character has 25 points in each combat category:
+
+Speed, Agility, Strength, Weapon Skill, Agility and Vitality
+
+For every point OVER 25 points, the character will receive a +1% modifier to their rolls, and vice versa for every point under.
+
+
+ATTACK DAMAGE
+
+A successful attack will have set damage depending on the type of attack.
+
+Quick: 5
+Normal: 10
+Power: 15
+
+This is then modified according to their strength, the weapon they are using, then any force power in effect, in that order.
+For example, if a character has 30 strength, a +20% strength modifier from their sword, and land a normal attack,
+the damage will be:   10*1.05*1.2, which comes to 12.6 damage.
+
+AGILITY AND WEAPON SKILLS
+
+Characters will have a base level of a 50% chance of hitting their opponent.
+
+Example 1: 
+
+If they have a weapon skill of 20 that chance decreases by 5%, 1% for each point under the base of 25.  
+If their opponent is highly agile and has agility of 30, then that chance decreases further, to only 40% total.
+
+This base chance of a hit is further modified by weapons and force power.
+
+Example 1.1: 
+
+If the lightsabre increases their chance of hitting by 20% (the Darth Vader), and they are using the minor weaponskill force power, 
+that chance goes up from 40% to 70%!
+
+Vitality
+
+Vitality can be increased with the heal force power.  Otherwise it is depleted by weapon strikes unti the Jedi/Sith is defeated.
+The same principles will apply - so for example if a character has vitality of 30 their base value will increase by 5%, 
+bringing the number up to 52.5.
+
+
+On the subject of the numbers, I think it would be a good idea to round everything up to keep things clean.
+
+
