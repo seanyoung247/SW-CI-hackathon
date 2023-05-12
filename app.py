@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 app = Flask(__name__)
@@ -13,12 +13,6 @@ def index():
 
 
 # Socket two way communications between clients and server --
-
-# Chat messaging
-@socketio.on('chat')
-def sock_message(message):
-    emit('receive', {'data': message['data']}, broadcast=True)
-
 
 # Arena admin
 @socketio.on('join-arena')
@@ -43,7 +37,6 @@ def sock_chat(message):
     username = message['username']
     arena = message['arena']
     msg = message['message']
-    print(username, arena, msg)
     emit('chat-msg', {'username': username, 'data': msg}, broadcast=True, to=arena)
 
 
