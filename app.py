@@ -20,16 +20,37 @@ def sock_message(message):
     emit('receive', {'data': message['data']}, broadcast=True)
 
 
-# Room admin
-@socketio.on('create-room')
-def sock_create_room(message):
-    pass
+# Arena admin
+@socketio.on('join-arena')
+def sock_join_arena(message):
+    username = message['username']
+    arena = message['arena']
+    join_room(arena)
+    emit('chat-msg', {'username': username, 'data': 'has joined'}, to=arena)
 
 
-# Basic client server
+@socketio.on('leave-arena')
+def sock_leave_arena(message):
+    username = message['username']
+    arena = message['arena']
+    leave_room(arena)
+    emit('chat-msg', {'username': username, 'data': 'has left'}, to=arena)
+
+
+# Chat
+@socketio.on('chat-msg')
+def sock_chat(message):
+    username = message['username']
+    arena = message['arena']
+    msg = message['message']
+    print(username, arena, msg)
+    emit('chat-msg', {'username': username, 'data': msg}, broadcast=True, to=arena)
+
+
+# Basic client server admin
 @socketio.on('connect')
 def sock_connect():
-    emit('recieve', {'data': 'Connected'})
+    emit('recieve', {'type': 'admin', 'data': 'Connected'})
 
 
 @socketio.on('disconnect')
