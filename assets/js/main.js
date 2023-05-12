@@ -49,3 +49,7 @@ let colorDictionary = {
   "sea blue": "#408F94",
   "deep sea blue": "#2F748F"
 };
+
+let powerList = [
+  "Telekinesis",
+]
