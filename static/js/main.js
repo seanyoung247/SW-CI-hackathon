@@ -12,14 +12,14 @@ import { socket, setUsername, getChallengeCode, challengePlayer } from './server
         });
 
     document.getElementById('challenge-btn').addEventListener('click', e=> {
-        const challenge_input = document.getElementById('challenge-code');
-        const challenge_code = challenge_input.value;
-        challengePlayer(challenge_code)
+        const challengeInput = document.getElementById('challenge-code');
+        const challengeCode = challengeInput.value;
+        challengePlayer(challengeCode)
             .then(()=>{
 
             })
             .catch(msg => {
-                challenge_input.value = '';
+                challengeInput.value = '';
                 alert(`Challenge failed: ${msg}`)
             });
     });

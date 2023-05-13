@@ -1,18 +1,21 @@
 from os import environ
 from flask import Flask, render_template, session, request
-from flask_socketio import SocketIO, emit, join_room, leave_room, rooms
+from flask_socketio import SocketIO, emit, join_room, leave_room
+
+from utils import set_arena
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 socketio = SocketIO(app)
 
 
+PLAYERS = {}
+
+
 # Entry point. Loads the index.html
 @app.route('/')
 def index():
     return render_template('index.html')
-
-PLAYERS = {}
 
 # Socket two way communications between clients and server --
 
@@ -22,8 +25,8 @@ def set_username(message):
     # Add the new username to the session
     PLAYERS[request.sid]['username'] = message['username']
     # Put the player in the waiting room
-    PLAYERS[request.sid]['arena'] = 'waiting'
-    join_room(PLAYERS[request.sid]['arena'])
+
+    set_arena(PLAYERS[request.sid], 'waiting')
 
 
 # Arena admin
@@ -54,7 +57,9 @@ def challenge_player(message):
 
 
 
-
+@socketio.on('chat-msg')
+def chat_message(message):
+    pass
 
 
 
@@ -76,11 +81,11 @@ def sock_disconnect():
     challenger =  PLAYERS[request.sid].get('challenger')
     if challenger:
         PLAYERS[challenger]['challenger'] = None
-        PLAYERS[challenger]['waiting']
+        set_arena(PLAYERS[challenger], 'waiting')
         emit('chat-msg', {
             'user': PLAYERS[request.sid].get('username'),
-            'data': 'Has Left'
-        })
+            'data': 'Has Left',
+        }, to=challenger)
 
     del PLAYERS[request.sid]
     print('Client disconnected')
