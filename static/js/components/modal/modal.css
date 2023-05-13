@@ -72,7 +72,7 @@
 
 .modal-content {
     flex: 1 1 auto;
-    overflow-y: scroll;
+    overflow-y: auto;
     border-top: var(--section-divider);
     border-bottom: var(--section-divider);
 }

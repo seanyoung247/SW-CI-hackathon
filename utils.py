@@ -20,8 +20,8 @@ def set_arena(player, arena):
 
 
 def set_challenger(player, challenger):
-    set_arena(player, player['id'])
     set_arena(challenger, player['id'])
+    set_arena(player, player['id'])
     print(challenger['arena'], player['arena'])
     player['challenger'] = challenger['id']
     challenger['challenger'] = player['id']

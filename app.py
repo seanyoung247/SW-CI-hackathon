@@ -59,7 +59,16 @@ def challenge_player(message):
     set_challenger(player, challenger)
 
 
+# Battle routes
+@socketio.on('do-round')
+def do_round():
+    # Check if challenger has started round
+        # Do fight
+    # Else wait for challenger
+    pass
 
+
+# Chat routes
 @socketio.on('chat-msg')
 def chat_message(message):
     msg = {
@@ -75,10 +84,12 @@ def chat_message(message):
 def sock_connect():
     print('Client connected')
     PLAYERS[request.sid] = {
-        'id': request.sid,
-        'username': None,
-        'arena': None,
-        'challenger': None,
+        'id': request.sid,      # Player unique ID
+        'username': None,       # Player display name
+        'arena': None,          # The Players current room
+        'challenger': None,     # The Players current challenger
+        'ready': False,         # True if player is ready to start round
+        # Player character and modifiers go here
     }
     emit('recieve', {'type': 'admin', 'data': 'Connected'})
 
