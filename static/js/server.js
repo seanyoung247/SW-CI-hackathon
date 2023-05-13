@@ -31,6 +31,10 @@ export function challengePlayer(code) {
     });
 }
 
+export function endChallenge() {
+    socket.emit('leave-challenge');
+}
+
 /*
  * Chat messages
  */

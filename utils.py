@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO, emit, join_room, leave_room, rooms
+from flask_socketio import emit, join_room, leave_room
 
 
 def set_arena(player, arena):
@@ -18,10 +18,15 @@ def set_arena(player, arena):
     }, to=player['arena'], broadcast=True)
 
 
-
 def set_challenger(player, challenger):
     set_arena(challenger, player['id'])
     set_arena(player, player['id'])
-    print(challenger['arena'], player['arena'])
     player['challenger'] = challenger['id']
     challenger['challenger'] = player['id']
+
+
+def end_challenge(player, challenger):
+    set_arena(challenger, 'waiting')
+    set_arena(player, 'waiting')
+    player['challenger'] = None
+    challenger['challenger'] = None

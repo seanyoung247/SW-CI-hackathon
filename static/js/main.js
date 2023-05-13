@@ -1,6 +1,6 @@
 import { 
     setUsername, 
-    getChallengeCode, challengePlayer,
+    getChallengeCode, challengePlayer, endChallenge,
     sendChat, recieveChat
 } from './server.js';
 
@@ -25,7 +25,7 @@ import {
         const challengeCode = challengeInput.value;
         challengePlayer(challengeCode)
             .then(()=>{
-
+                // Battle start code here
             })
             .catch(msg => {
                 challengeInput.value = '';
