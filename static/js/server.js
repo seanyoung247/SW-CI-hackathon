@@ -31,24 +31,13 @@ export function challengePlayer(code) {
     });
 }
 
+/*
+ * Chat messages
+ */
+export function sendChat(message) {
+    socket.emit('chat-msg', message);
+}
 
-
-
-
-// // Join Room
-// export function joinArena(username, arena) {
-//     socket.emit('join-arena', {username, arena});
-// }
-
-// // Leave Room
-// export function leaveArena(username, arena) {
-//     socket.emit('leave-arena', {username, arena});
-// }
-
-// // Send chat
-// export function sendChat(username, message, arena) {
-//     socket.emit('chat-msg', {username, message, arena});
-// }
-
-// Recieve chat
-export function recieveChat() {}
+export function recieveChat(callback) {
+    socket.on('chat-msg', callback);
+}
