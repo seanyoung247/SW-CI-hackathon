@@ -2,7 +2,8 @@ from os import environ
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
-from utils import set_arena, set_challenger
+from utils import set_arena, set_challenger, end_challenge
+#from game import game stuff yo
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
@@ -24,7 +25,6 @@ def index():
 def set_username(message):
     # Add the new username to the session
     PLAYERS[request.sid]['username'] = message['username']
-    print( PLAYERS[request.sid]['username'], message['username'])
     # Put the player in the waiting room
     set_arena(PLAYERS[request.sid], 'waiting')
 
@@ -53,11 +53,31 @@ def challenge_player(message):
         emit('challenge-failed', {'data':"Player already dueling!"})
         return
     
+    player = PLAYERS[request.sid]
+    challenger = PLAYERS[message['code']]
     # Lets get ready to ruuuuuumble
+    set_challenger(player, challenger)
 
 
+@socketio.on('leave-challenge')
+def leave_challenge():
+    # You're a do not person then, huh?
+    player = PLAYERS[request.sid]
+    challenger = PLAYERS[player['challenger']]
+    end_challenge(player, challenger)
 
 
+# Battle routes
+@socketio.on('do-round')
+def do_round(message):
+    # Check if challenger has started round
+        # Do fight
+        # Broadcast results
+    # Else wait for challenger
+    pass
+
+
+# Chat routes
 @socketio.on('chat-msg')
 def chat_message(message):
     msg = {
@@ -67,16 +87,17 @@ def chat_message(message):
     emit('chat-msg', msg, to=PLAYERS[request.sid]['arena'], broadcast=True)
 
 
-
 # Basic client server admin
 @socketio.on('connect')
 def sock_connect():
     print('Client connected')
     PLAYERS[request.sid] = {
-        'id': request.sid,
-        'username': None,
-        'arena': None,
-        'challenger': None,
+        'id': request.sid,      # Player unique ID
+        'username': None,       # Player display name
+        'arena': None,          # The Players current room
+        'challenger': None,     # The Players current challenger
+        'ready': False,         # True if player is ready to start round
+        # Player character and modifiers go here
     }
     emit('recieve', {'type': 'admin', 'data': 'Connected'})
 
