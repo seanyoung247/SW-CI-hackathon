@@ -10,15 +10,21 @@
     <script src="{{ url_for('static', filename='js/main.js') }}" type="module"></script>
 </head>
 <body>
-    <input type="text" id="room-name" placeholder="room">
-    <button id="join-room">Join Room</button>
-    <button id="leave-room">Leave Room</button>
-
-    <input type="text" id="username" placeholder="username">
+    <p>
+        <div>Your challenge code: <span id="player-challenge-code"></span></div>
+        <input type="text" id="challenge-code" placeholder="opponent challenge code">
+        <button id="challenge-btn">Challenge Player</button>
+    </p>
+    <p>
+        <input type="text" id="username" placeholder="username">
+        <button id="set-user">Set Username</button>
+    </p>
 
     <form action="#" id="chat">
+        <textarea id="chat-box" cols="30" rows="10" readonly></textarea>
         <input type="text" id="chat-msg">
         <input type="submit" value="Send Message">
     </form>
+    
 </body>
 </html>
