@@ -1,4 +1,4 @@
-let listCharacters = [
+export const listCharacters = [
   "Darth Vader",
   "Han Solo",
   "Princess Leia Organa",
@@ -31,7 +31,7 @@ let listCharacters = [
   "Nein Nunb"
 ];
 
-let colorDictionary = {
+export const colorDictionary = {
   "yellowish": "#d5c180",
   "peach": "#e5b189",
   "purple": "#A5679C",
@@ -50,6 +50,6 @@ let colorDictionary = {
   "deep sea blue": "#2F748F"
 };
 
-let powerList = [
+export const powerList = [
   "Telekinesis",
 ]
