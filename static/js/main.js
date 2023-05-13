@@ -1,5 +1,5 @@
 import { 
-    socket, setUsername, 
+    setUsername, 
     getChallengeCode, challengePlayer,
     sendChat, recieveChat
 } from './server.js';
