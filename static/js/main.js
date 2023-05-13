@@ -1,34 +1,34 @@
-import { socket, joinArena, leaveArena, sendChat } from './sockets.js';
+import { socket, setUsername, getChallengeCode, challengePlayer } from './server.js';
 
 (()=>{
+    let username = '';
+    let myId = '';
 
-    const roomInput = document.getElementById('room-name');
-    const userInput = document.getElementById('username');
-    let room = '';
 
-    document.getElementById('join-room').addEventListener('click', e => {
-        const roomID = roomInput.value;
-        if (roomID) {
-            room = roomID;
-            joinArena(userInput.value, room);
+    getChallengeCode()
+        .then(code => {
+            myId = code;
+            document.getElementById('player-challenge-code').innerText = code;
+        });
+
+    document.getElementById('challenge-btn').addEventListener('click', e=> {
+        const challengeInput = document.getElementById('challenge-code');
+        const challengeCode = challengeInput.value;
+        challengePlayer(challengeCode)
+            .then(()=>{
+
+            })
+            .catch(msg => {
+                challengeInput.value = '';
+                alert(`Challenge failed: ${msg}`)
+            });
+    });
+
+
+    document.getElementById('set-user').addEventListener('click', e => {
+        username = document.getElementById('username').value;
+        if (username) {
+            setUsername(username);
         }
     });
-
-    document.getElementById('leave-room').addEventListener('click', e => {
-        if (room) {
-            leaveArena(userInput.value, room);
-        }
-    });
-
-    document.getElementById('chat').addEventListener('submit', e => {
-        e.preventDefault();
-        const user = userInput.value;
-        const msg = document.getElementById('chat-msg').value;
-        sendChat(user, msg, room);
-    });
-
-    socket.on('chat-msg', msg => {
-        console.log(msg.username, msg.data);
-    })
-
 })()
