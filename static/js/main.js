@@ -8,7 +8,6 @@ import {
     let username = '';
     let myId = '';
 
-
     /*
      * Gets the current users challenge code from the server
      */
@@ -50,10 +49,12 @@ import {
      * Sends chat messages to the current room or challenger
      */
     document.getElementById('chat').addEventListener('submit', e=>{
-        const chatMsg = document.getElementById('chat-msg').value;
+        const chatMsg = document.getElementById('chat-msg');
         e.preventDefault();
-        if (chatMsg) {
-            sendChat(chatMsg);
+        if (chatMsg.value) {
+            sendChat(chatMsg.value);
+            // Clear chat message
+            chatMsg.value = '';
         }
     });
 
@@ -63,6 +64,9 @@ import {
     recieveChat(msg => {
         const chatBox = document.getElementById('chat-box');
         const {username, data} = msg;
+        // Add the message
         chatBox.value += `\n${username}\t - ${data}`;
+        // Scroll to bottom
+        chatBox.scrollTop = chatBox.scrollHeight;
     });
 })()
