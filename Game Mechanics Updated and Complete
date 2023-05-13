@@ -143,7 +143,7 @@ PLAYER 2 NUMBERS
 Player 2 playes the Agility forcepower
 
 $player2_hitchance = ($weapon_p2-25) + $wep_skill + (25 - $agility_p1)
-In this case  (0+20-3) = 68%
+In this case  (0+20-3-20) = 48%
 
 $player2_dmg = ceil((($strength - 25) + $wep_strength)/100 * rng(4-12))
 In this case, assuming a ten:  (5+20)/100 = 1.25 * 10 (rounded up) = 13
@@ -217,10 +217,10 @@ player 1 has hitchance reduced by 20%
 if (rnd(1,100)<=$player1_hitchance) {$hit = $player1_dmg+$player1_forcedmg}else{$hit=$player1_forcedmg}
 if (rnd(1,100)<=$player2_hitchance) {$hit = $player2_dmg+$player2_forcedmg}else{$hit=$player2_forcedmg}
 
-In real numbers, assume player 1 rolls a 50.  This above his hitchance so he misses his sword attack this turn.
+In real numbers, assume player 1 rolls a 40.  This above his hitchance of 37 so he misses his sword attack this turn.
 He still rolls a 6 for forcepush damage though, which means his total damage is 6.
 
-Player 2 also rolls 50, but their chance to hit was 67!  This means they do their damage of 13
+Player 2 also rolls 40, and their chance to hit was 48!  This means they do their damage of 13
 
 Once the damage done to each player has been assessed, it can be deducted from the healthbars of each
 
