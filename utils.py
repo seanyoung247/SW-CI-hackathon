@@ -7,10 +7,10 @@ def set_arena(player, arena):
             'username': player['username'],
             'data': 'Has Left',
         }, to=arena, broadcast=True)
-        leave_room(player['arena'])
+        leave_room(player['arena'], sid=player['id'])
     
     player['arena'] = arena
-    join_room(player['arena'])
+    join_room(player['arena'], sid=player['id'])
     print(player, player['arena'], player['username'])
     emit('chat-msg', {
         'username': player['username'],
@@ -20,4 +20,8 @@ def set_arena(player, arena):
 
 
 def set_challenger(player, challenger):
-    pass
+    set_arena(player, player['id'])
+    set_arena(challenger, player['id'])
+    print(challenger['arena'], player['arena'])
+    player['challenger'] = challenger['id']
+    challenger['challenger'] = player['id']

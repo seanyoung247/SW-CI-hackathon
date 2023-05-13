@@ -53,8 +53,10 @@ def challenge_player(message):
         emit('challenge-failed', {'data':"Player already dueling!"})
         return
     
+    player = PLAYERS[request.sid]
+    challenger = PLAYERS[message['code']]
     # Lets get ready to ruuuuuumble
-
+    set_challenger(player, challenger)
 
 
 
