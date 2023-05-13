@@ -1,7 +1,8 @@
 import { 
     setUsername, 
     getChallengeCode, challengePlayer, endChallenge,
-    sendChat, recieveChat
+    sendChat, recieveChat,
+    doRound
 } from './server.js';
 
 (()=>{

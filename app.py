@@ -69,9 +69,10 @@ def leave_challenge():
 
 # Battle routes
 @socketio.on('do-round')
-def do_round():
+def do_round(message):
     # Check if challenger has started round
         # Do fight
+        # Broadcast results
     # Else wait for challenger
     pass
 

@@ -36,6 +36,13 @@ export function endChallenge() {
 }
 
 /*
+ * Battle Rounds
+ */
+export function doRound(character, weapon, modifier) {
+    socket.emit('do-round', {character, weapon, modifier});
+}
+
+/*
  * Chat messages
  */
 export function sendChat(message) {
