@@ -1,0 +1,6 @@
+
+/* Removes the close button from the username modal */
+#username-modal::part(modal-close) {
+    display: none;
+    pointer-events: none;
+}

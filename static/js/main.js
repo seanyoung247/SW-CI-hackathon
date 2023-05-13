@@ -38,9 +38,11 @@ import {
      * Sets user name
      */
     document.getElementById('set-user').addEventListener('click', e => {
+        const usernameModal = document.getElementById('username-modal');
         username = document.getElementById('username').value;
         if (username) {
             setUsername(username);
+            usernameModal.show = false;
         }
     });
 
