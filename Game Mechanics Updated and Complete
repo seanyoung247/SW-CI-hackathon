@@ -1,0 +1,236 @@
+UPDATED MECHANICS (SINGLE DOCUMENT)
+
+I'm assigning each of the mechanics a variable and adding the maths for combat resolution,
+ also taking into account the revised game mechanics agreed in the meeting yesterday and confirmed in Slack.
+
+ CHARACTER SHEET
+
+AFFILIATION:   (Jedi/Sith - determines force cards avaiable in future versions.)
+                For now it looks like we're going with set characters so this field just adds a bit of colour!
+
+SKILLS:
+
+All skills based on a total allocation of 75 points.  A balance character will have all skills at 25
+For any value over 25 the modifier is plus 1% per level, under 25 it's -1% per level.
+
+Example: If a character has a skill at 28, the modifier is 28-25 = 3%
+
+STRENGTH ($strength_p$)       
+WEAPON SKILL ($weapon_p$)
+AGILITY ($agility_p$)
+
+WEAPONS:
+
+Each Jedi will have a specific weapon pre-allocated.  There may be scope if we have time to have the option to choose
+a weapon but for now each character has a pre-allocated one.
+
+Weapons modifiers att a percentage to a specific skill and also have a drawback regarding another skill.  
+Revised weapon list keeping in mind the cut-down attributes as follows:
+
+Double ended lightsabre (Darth Maul equips this):  +20% strength, -20% agility ($double)
+blue lightsabre (Jedis Equip this):  + 20% agility,  -20% strength ($blue)
+red lightsabre (Sith Equip this):  + 20% weapon skill,   -20% agility ($red)
+
+As above, I'd set a variable for each of the weapon skill modifiers and use that calculating the player's oveall ratings.
+
+
+Each would have a value of either 20, -20 or 0 depending on the weapon they are allocated
+
+$wep_strength
+$wep_skill
+$wep_agility
+
+We can apply all these modifiers to the character before stats are committed to the server.  
+
+Initial approach:-  Because the character is pre-drawn they can have the weapon stats baked in
+Nice to have:- A simple 'case' statement uising the variables (or whatever the Python equiv is) for the effects of 
+                each weapon could be used to add the appropriate modifiers.
+
+FORCE POWER:
+
+This is the only dynamic variable, and will be added once a player has selected it and both have selected the 'fight' button.
+With the way we are going ahead, the Force Power Card will either add a modifier to a skill, have a negative health effect,
+or have a positive health effect. 
+
+  I assume a 'case' statement or similar
+
+FACTION SPECIFIC (each faction will have attack/heal cards which basically do the same thing)
+When selected for each player it will set a variable $forcepower for that player
+
+Electic bolt:  opponent loses 4-12 health ($forcepower_p$ = "neg_health")
+Force Push: opponent loses 4-12 health ($forcepower_p$= "neg_health")
+Heal: character gains 4-12 health ($forcepower_p$="pos_health")
+Turn to Dark Side:  charachter gains 4-12 health ($forcepower_p$="pos_health")
+
+MODIFIERS: (I've simplified this to one for each skill category)
+
+strength: +20 ($forcepower_p$="s_force")
+weapon skill: +20 ($forcepower_p$="w_force")
+agility: +20 ($forcepower_p$="a_force")
+
+BATTLE PROCESSING
+
+Once both players have selected a card and pressed the fight button, all the above values are committed to the server.  
+
+Round outcome would be worked out in 4 stages
+
+1) work out the character attribute modifiers and weapons modifiers
+2) Take into account the force power effects (as these do not require skill/agility rolls
+3) resolve the combat
+4) calculate the effects of the combat and update player stats accordingly.
+
+BASE CHANCE TO HIT - 50%
+BASE DAMAGE - RNG 4-12 ($damage)
+
+Step 1 - player stats
+
+Here are two basic characters for this example, where I'll play out a round to demonstate the maths and all that:
+
+PLAYER 1:  Luke 'use the force' Skywalker
+
+$strength = 21     
+$weapon = 27
+$agility = 27
+
+Plus weapon variables:
+$wep_strength= -20
+$wep_skill= 0
+$wep_agility= 20
+
+
+PLAYER 2:  Darth 'I am your father' Vader
+
+$strength = 30     
+$weapon = 25
+$agility = 20
+
+Plus weapon variables:
+$wep_strength= 0
+$wep_skill= 20
+$wep_agility= -20
+
+EXAMPLE ROUND.
+
+PLAYER 1 chooses the strength force power
+PLAYER 2 chooses the eletric bolt force power
+
+PLAYER 1 chance to hit = $player1_hitchance
+PLAYER 2 chance to hit = $player2_hitchance
+PLAYER 1 damage done = $player1_dmg
+PLAYER 2 damage done = $player2_dmg
+Player 1's health - $player1_health
+Player 's health = $player2_health
+
+PLAYER 1 NUMBERS
+
+Player 1 plays the forcepush card
+
+$player1_hitchance = ($weapon_p1-25) + $wep_skill + (25 - $agility_p2)
+In this case  (2+0+5) = 57%
+
+//The potential damage done need to be worked out before it's established whether or not the hit has been successful or not,
+//because force power modifiers will only be added at the end.
+
+$player1_dmg = ceil((($strength - 25) + $wep_strength)/100 * rng(4-12))
+In this case, assuming luke rolls a ten, the damage is:  (-4-20)/100 = 0.76 * 10 (rounded up) = 8.
+
+-----------
+
+Then do the same for player two, but in reverse:
+
+PLAYER 2 NUMBERS
+
+Player 2 playes the Agility forcepower
+
+$player2_hitchance = ($weapon_p2-25) + $wep_skill + (25 - $agility_p1)
+In this case  (0+20-3-20) = 48%
+
+$player2_dmg = ceil((($strength - 25) + $wep_strength)/100 * rng(4-12))
+In this case, assuming a ten:  (5+20)/100 = 1.25 * 10 (rounded up) = 13
+
+So now we have values for damage and hitchance we need to apply the force card modifiers.
+I know php, so I'd go with a couple of swtich statements I guess all languages have the equivalent
+
+//set forcedamage to 0 as a default for both players:
+//sets default as zero for damage from force pushed or electic bolts)
+
+$player1_forcedmg = 0 
+$player2_forcedmg = 0 
+
+switch ($forcepower_p1) {
+    //adds a force damage (variable set to 0 initially. (see above))
+    case "neg_health":
+       $player1_forcedmg =  rand(4,12);  
+        break;
+    //adds positive health to the player's health
+    case "pos_health":
+        $player1_health=$player1_health + rand(4,12);
+        break;
+     //adds  to player's damage multiplier for that turn
+    case "s_force":
+        $player1_dmg= $player1_dmg*1.2;
+        break;
+     //adds  to player's weapon skill multiplier for that turn
+    case "w_force":
+        $player1_hitchance = $player1_hitchance + 20
+        break;
+    //adds  agility (effectively reducing opponent's chance to hit)
+    case "a_force":
+        $player2_hitchance = $player2_hitchance - 20
+        break;
+}
+
+switch ($forcepower_p2) {
+    //adds a force damage (variable set to 0 initially. (see above))
+    case "neg_health":
+       $player2_forcedmg =  rand(4,12);  
+        break;
+    //adds positive health to the player's health
+    case "pos_health":
+        $player2_health=$player2_health + rand(4,12);
+        break;
+     //adds  to player's damage multiplier for that turn
+    case "s_force":
+        $player2_dmg= $player2_dmg*1.2;
+        break;
+     //adds  to player's weapon skill multiplier for that turn
+    case "w_force":
+        $player2_hitchance = $player2_hitchance + 20
+        break;
+    //adds  agility (effectively reducing opponent's chance to hit)
+    case "a_force":
+        $player1_hitchance = $player1_hitchance - 20
+        break;
+}
+
+
+To establish chance to hit randonise a number between 1 and 100, 
+if it's higher than the % chance the player hits and does damage to the opponent.  We can use the variable hit get a final number
+
+//tests if the player managed a hit - if they did add the damage number onto any force effects, if not just use the force effects
+
+MODIFIERS:
+
+player 1 has forcedamage changed from 0 to rnd(4,12)
+player 1 has hitchance reduced by 20%
+
+if (rnd(1,100)<=$player1_hitchance) {$hit = $player1_dmg+$player1_forcedmg}else{$hit=$player1_forcedmg}
+if (rnd(1,100)<=$player2_hitchance) {$hit = $player2_dmg+$player2_forcedmg}else{$hit=$player2_forcedmg}
+
+In real numbers, assume player 1 rolls a 40.  This above his hitchance of 37 so he misses his sword attack this turn.
+He still rolls a 6 for forcepush damage though, which means his total damage is 6.
+
+Player 2 also rolls 40, and their chance to hit was 48!  This means they do their damage of 13
+
+Once the damage done to each player has been assessed, it can be deducted from the healthbars of each
+
+//player 2 loses 6 health
+$player2_health=$player2_health = $hit
+//player 2 loses 13 health
+$player1_health=$player1_health = $hit
+
+
+On to the next round!  
+I think we need to get this up and running in a beta form ASAP because I do see balancing issues we need to resolve.
+
+
