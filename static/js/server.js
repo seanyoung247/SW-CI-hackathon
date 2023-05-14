@@ -14,6 +14,13 @@ export function setUsername(username) {
     socket.emit('set-username', {username});
 }
 
+export function getObjects() {
+    return new Promise( resolve => {
+        socket.emit('get-objects');
+        socket.on('set-objects', resolve);
+    });
+}
+
 export function getChallengeCode() {
     return new Promise( resolve => {
         socket.emit('get-challenge-code');
@@ -21,6 +28,16 @@ export function getChallengeCode() {
     });
 }
 
+/*
+ * Character management
+ */
+export function setCharacter(character) {
+    socket.emit('set-character', {character});
+}
+
+/*
+ * Challenges/Battles
+ */
 export function challengePlayer(code) {
     return new Promise( (resolve, reject) => {
         if (!code) reject('No code specified');
@@ -29,6 +46,10 @@ export function challengePlayer(code) {
         socket.on('challenge-accepted', msg => resolve(msg));
         socket.on('challenge-failed', msg => reject(msg.data));
     });
+}
+
+export function onChallenge(callback) {
+    socket.on('challenge-accepted', callback);
 }
 
 export function endChallenge() {

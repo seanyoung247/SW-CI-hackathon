@@ -1,8 +1,13 @@
 
 /* Removes the close button from the username modal */
-#username-modal::part(modal-close) {
+#username-modal::part(modal-close), 
+#character-modal::part(modal-close) {
     display: none;
     pointer-events: none;
+}
+
+modal-dialog::part(modal-pane) {
+  height: auto;
 }
 
 body {
