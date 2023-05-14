@@ -53,8 +53,8 @@
 
     <!-- Username modal -->
     <modal-dialog id="username-modal" static show>
-        <h3 slot="modal-header" id="start-user">What is your name young padawan?</h3>
-        <div slot="modal-content" class="user-input">
+        <h3 slot="modal-header" id="start-user" class="text-center">What is your name young padawan?</h3>
+        <div slot="modal-content" class="user-input d-flex justify-content-center">
             <input type="text" id="username" placeholder="Type your name">
             <button id="set-user">Set Username</button>
         </div>
@@ -161,11 +161,13 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container my-auto">
         <form action="#" id="chat">
-            <textarea id="chat-box" cols="30" rows="10" readonly></textarea>
-            <input type="text" id="chat-msg">
-            <input type="submit" value="Send Message">
+            <textarea id="chat-box" cols="80" rows="10" readonly></textarea>
+            <br>
+            <input type="text" id="chat-msg" placeholder="Type your message..">
+            <br>
+            <button type="submit" value="Send Message" class="btn btn-dark" >Submit</button>
         </form>
     </div>
 
