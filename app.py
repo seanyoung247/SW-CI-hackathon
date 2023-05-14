@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
 from utils import set_arena, set_challenger, end_challenge
-#from game import game stuff yo
+from game import create_stat_sheet, resolve_round
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
@@ -17,6 +17,7 @@ PLAYERS = {}
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 # Socket two way communications between clients and server --
 
@@ -37,6 +38,10 @@ def get_challenge_code():
 
 @socketio.on('challenge-player')
 def challenge_player(message):
+
+    if not message.get('code'):
+        emit('challenge-failed', {'data':"No challenge code"})
+        return
 
     # You aint Jekyll and Hyde! You can't challenge yourself!
     if message['code'] == request.sid:
@@ -70,11 +75,37 @@ def leave_challenge():
 # Battle routes
 @socketio.on('do-round')
 def do_round(message):
-    # Check if challenger has started round
+    player = PLAYERS[request.sid]
+    challenger = player['challenger']
+    
+    if not challenger:
+        emit('round-failed', {'data': 'No challenger'})
+        return
+    
+    if not all(keys in message for keys in ('character','weapon','modifier')):
+        emit('round-failed', {'data': 'Missing required fields'})
+
+    # Generate the round sheet for the current player
+    player['round_stats'] = create_stat_sheet(
+        player,
+        message['character'],
+        message['weapon'],
+        message['modifier'],
+    )
+    
+    # Do we have a round sheet for the challenger yet?
+    if challenger['round_stats']:
         # Do fight
-        # Broadcast results
+        result = resolve_round(player, challenger)
+        # Check who won
+        # Broadcast results back to players
+
+        # If battle has been won, end the challenge 
+        # and return players to waiting room
+
+
     # Else wait for challenger
-    pass
+    return
 
 
 # Chat routes
@@ -96,8 +127,7 @@ def sock_connect():
         'username': None,       # Player display name
         'arena': None,          # The Players current room
         'challenger': None,     # The Players current challenger
-        'ready': False,         # True if player is ready to start round
-        # Player character and modifiers go here
+        'round_stats': None,   # The Players calculated stats for the current round
     }
     emit('recieve', {'type': 'admin', 'data': 'Connected'})
 
@@ -107,8 +137,7 @@ def sock_disconnect():
     # We need to clear the challenger if set
     challenger =  PLAYERS[request.sid].get('challenger')
     if challenger:
-        PLAYERS[challenger]['challenger'] = None
-        set_arena(PLAYERS[challenger], 'waiting')
+        end_challenge(PLAYERS[request.sid], challenger)
 
     del PLAYERS[request.sid]
     print('Client disconnected')
