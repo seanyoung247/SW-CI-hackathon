@@ -4,19 +4,18 @@ from defs import CHARACTERS
 
 def set_arena(player, arena):
     if player['arena'] and player['arena'] != player['id']:
-        emit('chat-msg', {
-            'username': player['username'],
-            'data': 'Has Left',
-        }, to=arena, broadcast=True)
+        # emit('chat-msg', {
+        #     'username': player['username'],
+        #     'data': 'Has Left',
+        # }, to=arena, broadcast=True)
         leave_room(player['arena'], sid=player['id'])
     
     player['arena'] = arena
     join_room(player['arena'], sid=player['id'])
-    print(player, player['arena'], player['username'])
-    emit('chat-msg', {
-        'username': player['username'],
-        'data': 'Has joined',
-    }, to=player['arena'], broadcast=True)
+    # emit('chat-msg', {
+    #     'username': player['username'],
+    #     'data': 'Has joined',
+    # }, to=player['arena'], broadcast=True)
 
 
 def set_challenger(player, challenger):
@@ -24,8 +23,8 @@ def set_challenger(player, challenger):
     set_arena(challenger, player['id'])
     set_arena(player, player['id'])
     # Set challengers
-    player['challenger'] = challenger['id']
-    challenger['challenger'] = player['id']
+    player['challenger'] = challenger
+    challenger['challenger'] = player
     # Clear round stats
     player['round_stats'] = None
     challenger['round_stats'] = None

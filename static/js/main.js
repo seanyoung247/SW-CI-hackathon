@@ -90,7 +90,7 @@ import {
         user.username = document.getElementById('username').value;
         const characterModal = document.getElementById('character-modal');
 
-        if (user.username ) {
+        if (user.username) {
             setUsername(user.username );
             usernameModal.show = false;
             characterModal.show = true;
