@@ -36,9 +36,9 @@ As above, I'd set a variable for each of the weapon skill modifiers and use that
 
 Each would have a value of either 20, -20 or 0 depending on the weapon they are allocated
 
-$wep_strength
-$wep_skill
-$wep_agility
+$wep_strength_p$
+$wep_skill_p$
+$wep_agility_p$
 
 We can apply all these modifiers to the character before stats are committed to the server.  
 
@@ -88,26 +88,26 @@ Here are two basic characters for this example, where I'll play out a round to d
 
 PLAYER 1:  Luke 'use the force' Skywalker
 
-$strength = 21     
-$weapon = 27
-$agility = 27
+$strength_p1 = 21     
+$weapon_p1 = 27
+$agility_p1 = 27
 
 Plus weapon variables:
-$wep_strength= -20
-$wep_skill= 0
-$wep_agility= 20
+$wep_strength_p1= -20
+$wep_skill_p1= 0
+$wep_agility_p1= 20
 
 
 PLAYER 2:  Darth 'I am your father' Vader
 
-$strength = 30     
-$weapon = 25
-$agility = 20
+$strength_p2 = 30     
+$weapon_p2 = 25
+$agility_p2 = 20
 
-Plus weapon variables:
-$wep_strength= 0
-$wep_skill= 20
-$wep_agility= -20
+Plus weapon variables (red light sabre):
+$wep_strength_p2 = 0
+$wep_skill_p2 = 20
+$wep_agility_p2 = -20
 
 EXAMPLE ROUND.
 
@@ -125,13 +125,13 @@ PLAYER 1 NUMBERS
 
 Player 1 plays the forcepush card
 
-$player1_hitchance = ($weapon_p1-25) + $wep_skill + (25 - $agility_p2)
+$player1_hitchance = ($weapon_p1-25) + $wep_skill_p1 + (25 - $agility_p2)
 In this case  (2+0+5) = 57%
 
 //The potential damage done need to be worked out before it's established whether or not the hit has been successful or not,
 //because force power modifiers will only be added at the end.
 
-$player1_dmg = ceil((($strength - 25) + $wep_strength)/100 * rng(4-12))
+$player1_dmg = ceil((($strength_p1 - 25) + $wep_strength_p1)/100 * rand(4,12))
 In this case, assuming luke rolls a ten, the damage is:  (-4-20)/100 = 0.76 * 10 (rounded up) = 8.
 
 -----------
@@ -142,10 +142,10 @@ PLAYER 2 NUMBERS
 
 Player 2 playes the Agility forcepower
 
-$player2_hitchance = ($weapon_p2-25) + $wep_skill + (25 - $agility_p1)
+$player2_hitchance = ($weapon_p2-25) + $wep_skill_p2 + (25 - $agility_p1)
 In this case  (0+20-3-20) = 48%
 
-$player2_dmg = ceil((($strength - 25) + $wep_strength)/100 * rng(4-12))
+$player2_dmg = ceil((($strength_p2 - 25) + $wep_strength_p2)/100 * rand(4,12))
 In this case, assuming a ten:  (5+20)/100 = 1.25 * 10 (rounded up) = 13
 
 So now we have values for damage and hitchance we need to apply the force card modifiers.

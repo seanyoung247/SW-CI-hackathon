@@ -31,6 +31,17 @@ export function challengePlayer(code) {
     });
 }
 
+export function endChallenge() {
+    socket.emit('leave-challenge');
+}
+
+/*
+ * Battle Rounds
+ */
+export function doRound(character, weapon, modifier) {
+    socket.emit('do-round', {character, weapon, modifier});
+}
+
 /*
  * Chat messages
  */
