@@ -30,6 +30,12 @@ def set_username(message):
     set_arena(PLAYERS[request.sid], 'waiting')
 
 
+# Character
+@socketio.on('set-character')
+def set_character(message):
+    PLAYERS[request.sid]['character'] = message.get('character')
+
+
 # Arena admin
 @socketio.on('get-challenge-code')
 def get_challenge_code():
@@ -39,6 +45,7 @@ def get_challenge_code():
 @socketio.on('challenge-player')
 def challenge_player(message):
 
+    # Did we maybe forget something?
     if not message.get('code'):
         emit('challenge-failed', {'data':"No challenge code"})
         return
@@ -62,6 +69,22 @@ def challenge_player(message):
     challenger = PLAYERS[message['code']]
     # Lets get ready to ruuuuuumble
     set_challenger(player, challenger)
+    emit('challenge-accepted', {
+        'players': [
+            {
+                'id': player['id'],
+                'username': player['username'],
+                'character': player['character'],
+                'health': player['health'],
+            },
+            {
+                'id': challenger['id'],
+                'username': challenger['username'],
+                'character': challenger['character'],
+                'health': challenger['health'],
+            }
+        ]
+    }, broadcast=True)
 
 
 @socketio.on('leave-challenge')
@@ -125,9 +148,11 @@ def sock_connect():
     PLAYERS[request.sid] = {
         'id': request.sid,      # Player unique ID
         'username': None,       # Player display name
+        'character': None,      # Name of the player character
         'arena': None,          # The Players current room
         'challenger': None,     # The Players current challenger
-        'round_stats': None,   # The Players calculated stats for the current round
+        'health': 0,            # Player current health
+        'round_stats': None,    # The Players calculated stats for the current round
     }
     emit('recieve', {'type': 'admin', 'data': 'Connected'})
 
