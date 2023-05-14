@@ -6,6 +6,13 @@ import {
 } from './server.js';
 
 (()=>{
+    // Stores the object definitions from the server
+    const objects = {
+        characters: null,
+        weapons: null,
+        modifiers: null,
+    };
+
     // Stores the details of the local player
     const user = {
         id: '',
@@ -28,6 +35,13 @@ import {
         .then(code => {
             user.id = code;
             document.getElementById('player-challenge-code').innerText = code;
+        });
+
+    getObjects()
+        .then(msg => {
+            objects.characters = msg.characters;
+            objects.weapons = msg.weapons;
+            objects.modifiers = msg.modifiers;
         });
 
     /*
@@ -83,7 +97,7 @@ import {
         const characterModal = document.getElementById('character-modal'); 
         // TEMPORARY. NEEDS TO BE SET BY CHARACTER CHOOSER UI
         user.character = document.getElementById('characterName').value;
-        
+
         if (user.character) {
             setCharacter(user.character);
             characterModal.show = false;

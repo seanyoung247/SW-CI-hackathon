@@ -4,6 +4,7 @@ from flask_socketio import SocketIO, emit
 
 from utils import set_arena, set_challenger, end_challenge
 from game import create_stat_sheet, resolve_round
+from defs import CHARACTERS, WEAPONS, MODIFIERS
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
@@ -16,16 +17,30 @@ PLAYERS = {}
 # Entry point. Loads the index.html
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template(
+        'index.html', 
+        characters=CHARACTERS, 
+        weapons=WEAPONS, 
+        modifiers=MODIFIERS
+    )
 
 
 # Socket two way communications between clients and server --
+
+# Game details
+@socketio.on('get-objects')
+def get_objects():
+    emit('set-objects', {
+        'characters': CHARACTERS, 
+        'weapons': WEAPONS, 
+        'modifiers': MODIFIERS
+    })
 
 # Username admin
 @socketio.on('set-username')
 def set_username(message):
     # Add the new username to the session
-    PLAYERS[request.sid]['username'] = message['username']
+    PLAYERS[request.sid]['username'] = message.get('username')
     # Put the player in the waiting room
     set_arena(PLAYERS[request.sid], 'waiting')
 
