@@ -52,6 +52,10 @@ export function onChallenge(callback) {
     socket.on('challenge-accepted', callback);
 }
 
+export function onBattleEnd(callback) {
+    socket.on('battle-complete', callback);
+}
+
 export function endChallenge() {
     socket.emit('leave-challenge');
 }

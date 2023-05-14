@@ -1,8 +1,9 @@
 import { 
-    setUsername, setCharacter, getChallengeCode, getObjects,
-    challengePlayer, onChallenge, endChallenge,
-    sendChat, recieveChat,
-    doRound
+    setUsername, setCharacter, getChallengeCode, getObjects,    // Setup
+    challengePlayer, endChallenge,                              // Challenges
+    onChallenge, onBattleEnd,                                   // Events
+    sendChat, recieveChat,                                      // Chat
+    doRound                                                     // Battle rounds
 } from './server.js';
 
 (()=>{
@@ -131,7 +132,7 @@ import {
         const chatBox = document.getElementById('chat-box');
         const {username, data} = msg;
         // Add the message
-        chatBox.value += `\n${username}\t - ${data}`;
+        chatBox.value += `${username}\t - ${data}\n`;
         // Scroll to bottom
         chatBox.scrollTop = chatBox.scrollHeight;
     });
