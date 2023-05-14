@@ -60,12 +60,12 @@
         </div>
     </modal-dialog>
 
-    <!--charactor modal-->
+    <!-- charactor modal-->
     <modal-dialog id="character-modal" static>
         <h3 slot="modal-header" id="start-character">Please pick your Character</h3>
         <div slot="modal-content" class="character-input">
             <input type="text" id="characterName" placeholder="Choose your character">
-            <button id="character-user">Setect Character</button>
+            <button id="set-character">Setect Character</button>
         </div>
     </modal-dialog>
 
@@ -83,11 +83,13 @@
 
     <div class="container my-auto">
         <form action="#" id="chat">
-            <textarea id="chat-box" cols="80" rows="10" readonly></textarea>
-            <br>
-            <input type="text" id="chat-msg" placeholder="Type your message..">
-            <br>
-            <button type="submit" value="Send Message" class="btn btn-dark mt-2" >Submit</button>
+            <textarea id="chat-box" rows="5" readonly></textarea>
+            <div class="chat-input">
+                <input type="text" id="chat-msg" placeholder="Type your message..">
+                <button type="submit" value="Send Message" class="btn btn-dark" >
+                    Submit
+                </button>
+            </div>
         </form>
     </div>
 
