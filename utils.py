@@ -23,10 +23,14 @@ def set_challenger(player, challenger):
     set_arena(player, player['id'])
     player['challenger'] = challenger['id']
     challenger['challenger'] = player['id']
+    player['round_stats'] = None
+    challenger['round_stats'] = None
 
 
 def end_challenge(player, challenger):
     set_arena(challenger, 'waiting')
     set_arena(player, 'waiting')
     player['challenger'] = None
+    player['round_stats'] = None
     challenger['challenger'] = None
+    challenger['round_stats'] = None
