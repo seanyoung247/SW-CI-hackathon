@@ -68,13 +68,17 @@
     
 
     <!-- Username modal -->
-    <modal-dialog id="username-modal" static show>
-        <h3 slot="modal-header">What is your name young padawan?</h3>
-        <div slot="modal-content">
-            <input type="text" id="username" placeholder="username">
-            <button id="set-user">Set Username</button>
+    <div class="container">
+        <div class="row modal-box d-flex align-items-center">
+            <modal-dialog id="username-modal" static show>
+                <h3 slot="modal-header" id="start-user">What is your name young padawan?</h3>
+                <div slot="modal-content" class="user-input">
+                    <input type="text" id="username" placeholder="Type your name">
+                    <button id="set-user">Set Username</button>
+                </div>
+            </modal-dialog>
         </div>
-    </modal-dialog>
+    </div>
 
 
     <p>
