@@ -37,6 +37,9 @@ import {
             document.getElementById('player-challenge-code').innerText = code;
         });
 
+    /*
+     * Gets the game object definitions from the server
+     */
     getObjects()
         .then(msg => {
             objects.characters = msg.characters;
@@ -72,7 +75,11 @@ import {
                 challenger.health = player.health;
             }
         }
-        
+    });
+
+    document.getElementById('test').addEventListener('click', e => {
+        // TEST
+        doRound(user.character, objects.characters[user.character].weapon, 'strength');
     });
 
     /*
