@@ -55,8 +55,12 @@ body {
 
   /**user modal**/
   #start-user {
-    font-weight: 600;
+    font-weight: 750;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
   }
 
   #set-user {
@@ -99,3 +103,12 @@ body {
     color: yellow !important;
   }
 
+  .card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.d-flex {
+  display: inline-block;
+}

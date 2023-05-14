@@ -31,6 +31,7 @@
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!--
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -41,6 +42,7 @@
                             href="#weapons">Weapons</a></li>
                 </ul>
             </div>
+            -->
         </div>
     </nav>
 
@@ -49,33 +51,10 @@
         <p class="text-light">In a galaxy far, far away, an epic battle of light and dark unfolds!</p>
     </div>
 
-    <!--intro
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card mt-3 border border-warning">
-                        <div class="card-body bg-dark d-flex align-items-center">
-                            <button class="user mx-auto openModal">User</button>
-    
-                            <div class="modal">
-                                <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <p>user info goes here</p>
-                                </div>
-                            </div>
-    
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
-
-
     <!-- Username modal -->
     <modal-dialog id="username-modal" static show>
-        <h3 slot="modal-header" id="start-user">What is your name young padawan?</h3>
-        <div slot="modal-content" class="user-input">
+        <h3 slot="modal-header" id="start-user" class="text-center">What is your name young padawan?</h3>
+        <div slot="modal-content" class="user-input d-flex justify-content-center">
             <input type="text" id="username" placeholder="Type your name">
             <button id="set-user">Set Username</button>
         </div>
@@ -86,7 +65,7 @@
         <h3 slot="modal-header" id="start-character">Please pick your Character</h3>
         <div slot="modal-content" class="character-input">
             <input type="text" id="characterName" placeholder="Choose your character">
-            <button id="set-character">Setect Character</button>
+            <button id="character-user">Setect Character</button>
         </div>
     </modal-dialog>
 
@@ -101,11 +80,13 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container my-auto">
         <form action="#" id="chat">
-            <textarea id="chat-box" cols="30" rows="10" readonly></textarea>
-            <input type="text" id="chat-msg">
-            <input type="submit" value="Send Message">
+            <textarea id="chat-box" cols="80" rows="10" readonly></textarea>
+            <br>
+            <input type="text" id="chat-msg" placeholder="Type your message..">
+            <br>
+            <button type="submit" value="Send Message" class="btn btn-dark mt-2" >Submit</button>
         </form>
     </div>
 
