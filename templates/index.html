@@ -73,17 +73,34 @@
 
 
     <!-- Username modal -->
-    <div class="container">
-        <div class="row modal-box d-flex align-items-center">
-            <modal-dialog id="username-modal" static show>
-                <h3 slot="modal-header" id="start-user">What is your name young padawan?</h3>
-                <div slot="modal-content" class="user-input">
-                    <input type="text" id="username" placeholder="Type your name">
-                    <button id="set-user">Set Username</button>
-                </div>
-            </modal-dialog>
+    <modal-dialog id="username-modal" static show>
+        <h3 slot="modal-header" id="start-user">What is your name young padawan?</h3>
+        <div slot="modal-content" class="user-input">
+            <input type="text" id="username" placeholder="Type your name">
+            <button id="set-user">Set Username</button>
         </div>
-    </div>
+    </modal-dialog>
+
+    <!--charactor modal-->
+
+    <modal-dialog id="character-modal" static>
+        <h3 slot="modal-header" id="start-character">Please pick your Character</h3>
+        <div slot="modal-content" class="character-input">
+            <input type="text" id="characterName" placeholder="Choose your character">
+            <button id="character-user">Setect Character</button>
+        </div>
+    </modal-dialog>
+
+    <!--Game start modal-->
+
+    <modal-dialog id="game-modal" static>
+        <h3 slot="modal-header" id="start-game">Game starts..</h3>
+        <div slot="modal-content" class="game-input">
+            <input type="text" id="gameName" placeholder="Choose your character">
+            <button id="game-user">Game Start</button>
+        </div>
+    </modal-dialog>
+
 
     <div class="container">
         <div class="row">
