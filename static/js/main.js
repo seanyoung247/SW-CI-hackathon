@@ -40,10 +40,15 @@ import {
     document.getElementById('set-user').addEventListener('click', e => {
         const usernameModal = document.getElementById('username-modal');
         username = document.getElementById('username').value;
+        const characterModal = document.getElementById('character-modal');
+
         if (username) {
             setUsername(username);
             usernameModal.show = false;
+            characterModal.show = true;
         }
+
+        
     });
 
     /*
