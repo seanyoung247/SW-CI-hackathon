@@ -1,4 +1,5 @@
 from flask_socketio import emit, join_room, leave_room
+from defs import CHARACTERS
 
 
 def set_arena(player, arena):
@@ -19,12 +20,18 @@ def set_arena(player, arena):
 
 
 def set_challenger(player, challenger):
+    # Put players in a private room
     set_arena(challenger, player['id'])
     set_arena(player, player['id'])
+    # Set challengers
     player['challenger'] = challenger['id']
     challenger['challenger'] = player['id']
+    # Clear round stats
     player['round_stats'] = None
     challenger['round_stats'] = None
+    # Set battle start vars
+    player['health'] = CHARACTERS[player['character']]['health']
+    challenger['health'] = CHARACTERS[challenger['character']]['health']
 
 
 def end_challenge(player, challenger):
@@ -34,3 +41,5 @@ def end_challenge(player, challenger):
     player['round_stats'] = None
     challenger['challenger'] = None
     challenger['round_stats'] = None
+    player['health'] = 0
+    challenger['health'] = 0

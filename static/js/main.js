@@ -1,21 +1,47 @@
 import { 
-    setUsername, 
-    getChallengeCode, challengePlayer, endChallenge,
+    setUsername, setCharacter, getChallengeCode, getObjects,
+    challengePlayer, onChallenge, endChallenge,
     sendChat, recieveChat,
     doRound
 } from './server.js';
 
 (()=>{
-    let username = '';
-    let myId = '';
+    // Stores the object definitions from the server
+    const objects = {
+        characters: null,
+        weapons: null,
+        modifiers: null,
+    };
+
+    // Stores the details of the local player
+    const user = {
+        id: '',
+        username: '',
+        character: '',
+        health: 0,
+    };
+    // Stores the details of the remote challenger
+    const challenger = {
+        id: '',
+        username: '',
+        character: '',
+        health: 0,
+    };
 
     /*
      * Gets the current users challenge code from the server
      */
     getChallengeCode()
         .then(code => {
-            myId = code;
+            user.id = code;
             document.getElementById('player-challenge-code').innerText = code;
+        });
+
+    getObjects()
+        .then(msg => {
+            objects.characters = msg.characters;
+            objects.weapons = msg.weapons;
+            objects.modifiers = msg.modifiers;
         });
 
     /*
@@ -25,9 +51,6 @@ import {
         const challengeInput = document.getElementById('challenge-code');
         const challengeCode = challengeInput.value;
         challengePlayer(challengeCode)
-            .then(()=>{
-                // Battle start code here
-            })
             .catch(msg => {
                 challengeInput.value = '';
                 alert(`Challenge failed: ${msg}`)
@@ -35,20 +58,50 @@ import {
     });
 
     /*
+     * Fired on challenge/battle start
+     */
+    onChallenge(msg => {
+        // Grab the player data:
+        for (const player of msg.players) {
+            if (player.id === user.id) {
+                user.health = player.health;
+            } else {
+                challenger.id = player.id;
+                challenger.username = player.username;
+                challenger.character = player.character;
+                challenger.health = player.health;
+            }
+        }
+        
+    });
+
+    /*
      * Sets user name
      */
     document.getElementById('set-user').addEventListener('click', e => {
         const usernameModal = document.getElementById('username-modal');
-        username = document.getElementById('username').value;
+        user.username = document.getElementById('username').value;
         const characterModal = document.getElementById('character-modal');
 
-        if (username) {
-            setUsername(username);
+        if (user.username ) {
+            setUsername(user.username );
             usernameModal.show = false;
             characterModal.show = true;
         }
+    });
 
-        
+    /*
+     * Sets player chracter
+     */
+    document.getElementById('set-character').addEventListener('click', e => {
+        const characterModal = document.getElementById('character-modal'); 
+        // TEMPORARY. NEEDS TO BE SET BY CHARACTER CHOOSER UI
+        user.character = document.getElementById('characterName').value;
+
+        if (user.character) {
+            setCharacter(user.character);
+            characterModal.show = false;
+        }
     });
 
     /*
