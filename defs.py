@@ -11,51 +11,56 @@ CHARACTERS = {
         'agility': 20,                      # Agility (Defence)
         'vitality': 50,                     # The full health value
         'health': 50,                       # Current health
-        'weapon': 'red_sabre',              # Default Weapon
+        'weapon': 'blue_sabre',             # Default Weapon
     },
     'yoda': {
         'name': 'Yoda',
+        'image': 'image_name.jpg',
         'affiliation': 'jedi',
         'strength': 30,
         'skill': 25,
         'agility': 20,
         'vitality': 50,
         'health': 50,
-        'weapon': 'red_sabre',
+        'weapon': 'blue_sabre',
     },
     'luke_skywalker': {
         'name': 'Luke Skywalker',
+        'image': 'image_name.jpg',
         'affiliation': 'jedi',
         'strength': 30,
         'skill': 25,
         'agility': 20,
         'vitality': 50,
         'health': 50,
-        'weapon': 'red_sabre',
+        'weapon': 'blue_sabre',
     },
     'mace_windu': {
         'name': 'Mace Windu',
+        'image': 'image_name.jpg',
         'affiliation': 'jedi',
         'strength': 30,
         'skill': 25,
         'agility': 20,
         'vitality': 50,
         'health': 50,
-        'weapon': 'red_sabre',
+        'weapon': 'blue_sabre',
     },
     'qui_gon': {
         'name': 'Qui Gon Jinn',
+        'image': 'image_name.jpg',
         'affiliation': 'jedi',
         'strength': 30,
         'skill': 25,
         'agility': 20,
         'vitality': 50,
         'health': 50,
-        'weapon': 'red_sabre',
+        'weapon': 'blue_sabre',
     },
     # Sith: Emperor Palpatine, Darth Vader, Darth Maul, Count Dooku, Kylo Ren
     'palpatine': {
         'name': 'Emperor Palpatine',
+        'image': 'image_name.jpg',
         'affiliation': 'sith',
         'strength': 30,
         'skill': 25,
@@ -66,6 +71,7 @@ CHARACTERS = {
     },
     'darth_vader': {
         'name': 'Darth Vader',
+        'image': 'image_name.jpg',
         'affiliation': 'sith',
         'strength': 30,
         'skill': 25,
@@ -76,6 +82,7 @@ CHARACTERS = {
     },
     'darth_maul': {
         'name': 'Darth Maul',
+        'image': 'image_name.jpg',
         'affiliation': 'sith',
         'strength': 30,
         'skill': 25,
@@ -86,6 +93,7 @@ CHARACTERS = {
     },
     'count_dooku': {
         'name': 'Count Dooku',
+        'image': 'image_name.jpg',
         'affiliation': 'sith',
         'strength': 30,
         'skill': 25,
@@ -96,6 +104,7 @@ CHARACTERS = {
     },
     'kylo_ren': {
         'name': 'Kylo Ren',
+        'image': 'image_name.jpg',
         'affiliation': 'sith',
         'strength': 30,
         'skill': 25,
