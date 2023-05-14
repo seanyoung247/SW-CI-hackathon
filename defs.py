@@ -89,7 +89,7 @@ CHARACTERS = {
         'agility': 20,
         'vitality': 50,
         'health': 50,
-        'weapon': 'red_sabre',
+        'weapon': 'red_double',
     },
     'count_dooku': {
         'name': 'Count Dooku',
@@ -150,117 +150,133 @@ WEAPONS = {
                 }
             ]
         },
+        'red_double' : {
+            'name': 'Double Red Light Sabre',
+            'modifiers': [
+                {
+                    'stat': 'strength',
+                    'display': 'Strength +10%',
+                    'value': 1.1,
+                },
+                {
+                    'stat': 'agility',
+                    'display': 'Agility -10%',
+                    'value': 0.9,
+                }
+            ]
+        },
     }
 }
 
 
 MODIFIERS = {
     # Modifiers for any faction
-    'any': {
-        'strength': {                           # Modifier unique ID
-            'name': 'Force Strength',           # Display name
-            'affect': 'Increase Strength 20%',  # Affect description
-            'modifiers': [
-                {                               # Player modifier
-                    'stat': 'strength',         # Stat to modify
-                    'value': 1.2,               # The value to multiply the stat by
-                },
-                {                               # Challenger modifier
-                    'stat': 'strength',
-                    'value': 1                  # No change
-                }
-            ]
-        },
-        'skill': {
-            'name': 'Force Skill',
-            'affect': 'Increase Skill 20%',
-            'modifiers': [
-                {
-                    'stat': 'skill',
-                    'value': 1.2,
-                },
-                {
-                    'stat': 'skill',
-                    'value': 1
-                }
-            ]
-        },
-        'agility': {
-            'name': 'Force Agility',
-            'affect': 'Increase Agility 20%',
-            'modifiers': [
-                {
-                    'stat': 'agility',
-                    'value': 1.2,
-                },
-                {
-                    'stat': 'agility',
-                    'value': 1
-                }
-            ]
-        },
+    'strength': {                           # Modifier unique ID
+        'name': 'Force Strength',           # Display name
+        'affiliation': None,                # Power affiliation. Only Jedi can use jedi power etc
+        'affect': 'Increase Strength 20%',  # Affect description
+        'modifiers': [
+            {                               # Player modifier
+                'stat': 'strength',         # Stat to modify
+                'value': 1.2,               # The value to multiply the stat by
+            },
+            {                               # Challenger modifier
+                'stat': 'strength',
+                'value': 1                  # No change
+            }
+        ]
     },
-    # Jedi only modifiers
-    'jedi': {
-        'push': {
-            'name': 'Force Push',
-            'affect': 'Reduces opponent attack strength',
-            'modifiers': [
-                {
-                    'stat': 'strength',
-                    'value': 1,
-                },
-                {
-                    'stat': 'strength',
-                    'value': 0.5
-                }
-            ]
-        },
-        'heal': {
-            'name': 'Force Heal',
-            'affect': 'Increases health by 50%',
-            'modifiers': [
-                {
-                    'stat': 'health',
-                    'value': 1.5,
-                },
-                {
-                    'stat': 'health',
-                    'value': 1
-                }
-            ]
-        },
+    'skill': {
+        'name': 'Force Skill',
+        'affiliation': None,
+        'affect': 'Increase Skill 20%',
+        'modifiers': [
+            {
+                'stat': 'skill',
+                'value': 1.2,
+            },
+            {
+                'stat': 'skill',
+                'value': 1
+            }
+        ]
+    },
+    'agility': {
+        'name': 'Force Agility',
+        'affiliation': None,
+        'affect': 'Increase Agility 20%',
+        'modifiers': [
+            {
+                'stat': 'agility',
+                'value': 1.2,
+            },
+            {
+                'stat': 'agility',
+                'value': 1
+            }
+        ]
+    },
+    # Jedi only powers
+    'push': {
+        'name': 'Force Push',
+        'affiliation': 'jedi',
+        'affect': 'Reduces opponent attack strength',
+        'modifiers': [
+            {
+                'stat': 'strength',
+                'value': 1,
+            },
+            {
+                'stat': 'strength',
+                'value': 0.5
+            }
+        ]
+    },
+    'heal': {
+        'name': 'Force Heal',
+        'affiliation': 'jedi',
+        'affect': 'Increases health by 50%',
+        'modifiers': [
+            {
+                'stat': 'health',
+                'value': 1.5,
+            },
+            {
+                'stat': 'health',
+                'value': 1
+            }
+        ]
     },
     # Sith only modifiers
-    'sith': {
-        'bolts': {
-            'name': 'Force Lightning',
-            'affect': 'Reduces opponent health by 50%',
-            'modifiers': [
-                {
-                    'stat': 'health',
-                    'value': 1,
-                },
-                {
-                    'stat': 'health',
-                    'value': 0.5
-                }
-            ]
-        },
-        'push': {
-            'name': 'Force Choke',
-            'affect': 'Reduces opponent defence agility',
-            'modifiers': [
-                {
-                    'stat': 'agility',
-                    'value': 1,
-                },
-                {
-                    'stat': 'agility',
-                    'value': 0.5
-                }
-            ]
-        },
-    }
+    'bolts': {
+        'name': 'Force Lightning',
+        'affiliation': 'sith',
+        'affect': 'Reduces opponent health by 50%',
+        'modifiers': [
+            {
+                'stat': 'health',
+                'value': 1,
+            },
+            {
+                'stat': 'health',
+                'value': 0.5
+            }
+        ]
+    },
+    'push': {
+        'name': 'Force Choke',
+        'affiliation': 'sith',
+        'affect': 'Reduces opponent defence agility',
+        'modifiers': [
+            {
+                'stat': 'agility',
+                'value': 1,
+            },
+            {
+                'stat': 'agility',
+                'value': 0.5
+            }
+        ]
+    },
 }
 
