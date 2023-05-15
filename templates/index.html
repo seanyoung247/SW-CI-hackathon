@@ -74,8 +74,21 @@
         <!-- Center Battle ground -->
         <div class="row flex-fill">
             <div id="battle-ground" class="d-flex">
+                <!-- Player section -->
                 <div class="flex-fill">
-                    player
+
+                    <div class="player-card jedi">
+                        <h4 id="char-name-text">Place name<span id="char-name"></span></h4>
+                        <img class="character-img" src="{{ url_for('static', filename='img/cards/characters/obi-wan.jpg') }}">
+                        <div class="player-stats">
+                            <div class="stat">Strength: <span id="str-value"></span></div>
+                            <div class="stat">Weapson Skill: <span id="ws-value"></span></div>
+                            <div class="stat">Agility: <span id="agi-value"></span></div>
+                            <div class="stat">Health: <span id="health-value"></span></div>
+                        </div>
+                        <div class="footer"></div>
+                    </div>
+
                 </div>
     
 
@@ -83,7 +96,7 @@
                     <button id="start-round-btn">Start Round</button>
                 </div>
                 
-    
+                <!-- Challenger section -->
                 <div class="flex-fill">
                     challenger
                 </div>
