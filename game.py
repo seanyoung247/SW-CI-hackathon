@@ -9,6 +9,11 @@ def create_stat_sheet(player, character, weapon, modifier):
     """
     char_stats = CHARACTERS[character]
     weapon_stats = WEAPONS.get(char_stats['affiliation']).get(weapon)
+
+    # Balancing
+    char_stats['agility'] = char_stats['agility'] * 1.2
+    char_stats['strength'] = char_stats['strength'] * 0.8
+
     # Add weapon modifiers to character stats:
     if weapon_stats:
         for mod in weapon_stats['modifiers']:
@@ -34,7 +39,6 @@ def resolve_round(players):
     """
     Takes player 1 and 2 stats and returns the battle results
     """
-
     for player in players:
         # Grab stats
         stats = player['round_stats']

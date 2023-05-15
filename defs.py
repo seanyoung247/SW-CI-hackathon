@@ -4,7 +4,7 @@ CHARACTERS = {
     # Jedi: Obi-Wan Kenobi, Yoda, Luke Skywalker, Mace Windu, Qui-Gon Jin
     'obi_wan': {                            # Unique ID name
         'name': 'Obi-Wan Kenobi',           # Display name
-        'image': 'image_name.jpg',          # Character image name
+        'image': 'img/cards/characters/obi-wan.jpg', # Character image name
         'affiliation': 'jedi',              # Affiliation name
         'strength': 20,                     # Strength
         'skill': 35,                        # Weapon Skill
@@ -15,7 +15,7 @@ CHARACTERS = {
     },
     'yoda': {
         'name': 'Yoda',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/yoda.jpg',
         'affiliation': 'jedi',
         'strength': 15,
         'skill': 25,
@@ -26,7 +26,7 @@ CHARACTERS = {
     },
     'luke_skywalker': {
         'name': 'Luke Skywalker',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/luke.jpg',
         'affiliation': 'jedi',
         'strength': 21,
         'skill': 27,
@@ -37,7 +37,7 @@ CHARACTERS = {
     },
     'mace_windu': {
         'name': 'Mace Windu',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/mace-windu.jpg',
         'affiliation': 'jedi',
         'strength': 25,
         'skill': 28,
@@ -48,7 +48,7 @@ CHARACTERS = {
     },
     'qui_gon': {
         'name': 'Qui Gon Jinn',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/qui-gon.jpg',
         'affiliation': 'jedi',
         'strength': 28,
         'skill': 25,
@@ -60,7 +60,7 @@ CHARACTERS = {
     # Sith: Emperor Palpatine, Darth Vader, Darth Maul, Count Dooku, Kylo Ren
     'palpatine': {
         'name': 'Emperor Palpatine',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/palpatine.jpg',
         'affiliation': 'sith',
         'strength': 22,
         'skill': 33,
@@ -71,7 +71,7 @@ CHARACTERS = {
     },
     'darth_vader': {
         'name': 'Darth Vader',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/darth-vader.jpg',
         'affiliation': 'sith',
         'strength': 29,
         'skill': 23,
@@ -82,7 +82,7 @@ CHARACTERS = {
     },
     'darth_maul': {
         'name': 'Darth Maul',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/darth-maul.jpg',
         'affiliation': 'sith',
         'strength': 35,
         'skill': 20,
@@ -93,7 +93,7 @@ CHARACTERS = {
     },
     'count_dooku': {
         'name': 'Count Dooku',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/count-dooku.jpg',
         'affiliation': 'sith',
         'strength': 23,
         'skill': 35,
@@ -104,7 +104,7 @@ CHARACTERS = {
     },
     'kylo_ren': {
         'name': 'Kylo Ren',
-        'image': 'image_name.jpg',
+        'image': 'img/cards/characters/kylo-ren.jpg',
         'affiliation': 'sith',
         'strength': 25,
         'skill': 22,

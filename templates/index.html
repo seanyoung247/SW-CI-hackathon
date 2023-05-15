@@ -43,7 +43,6 @@
     <modal-dialog id="character-modal" static>
         <h3 slot="modal-header" id="start-character">Please pick your Character</h3>
         <div slot="modal-content" class="character-input d-flex justify-content-center">
-            <!-- <input type="text" id="characterName" placeholder="Choose your character"> -->
             <select id="character-list">
 
                 {% for key, value in characters.items() %}
@@ -72,20 +71,61 @@
         </div>
 
         <!-- Center Battle ground -->
-        <div class="row flex-fill">
-            <div id="battle-ground" class="d-flex">
-                <div class="flex-fill">
-                    player
+        <div class="row flex-fill align-items-center">
+            <div id="battle-ground">
+                <!-- Player section -->
+                <div class="player-section">
+                    <div id="player-card" class="player-card sith">
+                        <div class="hide">
+                            <h4 class="char-name"><span id="player-name">placeholder</span></h4>
+                            <img id="player-img" class="character-img" src="">
+                            <div class="player-stats">
+                                <div class="card-stat">
+                                    Strength: <span id="player-str-value"></span>
+                                </div>
+                                <div class="card-stat">
+                                    Weapson Skill: <span id="player-ws-value"></span>
+                                </div>
+                                <div class="card-stat">
+                                    Agility: <span id="player-agi-value"></span>
+                                </div>
+                                <div class="card-stat">
+                                    Health: <span id="player-health-value"></span>
+                                </div>
+                            </div>
+                            <div class="footer"></div>
+                        </div>
+                    </div>
                 </div>
     
 
-                <div class="d-flex flex-fill justify-content-center align-items-center">
+                <div class="no-mans-land">
                     <button id="start-round-btn">Start Round</button>
                 </div>
                 
-    
-                <div class="flex-fill">
-                    challenger
+                <!-- Challenger section -->
+                <div class="player-section">
+                    <div id="challenger-card" class="player-card sith">
+                        <div class="hide">
+                            <h4 class="char-name"><span id="challenger-name">placeholder</span></h4>
+                            <img id="challenger-img" class="character-img" src="">
+                            <div class="player-stats">
+                                <div class="card-stat">
+                                    Strength: <span id="challenger-str-value"></span>
+                                </div>
+                                <div class="card-stat">
+                                    Weapson Skill: <span id="challenger-ws-value"></span>
+                                </div>
+                                <div class="card-stat">
+                                    Agility: <span id="challenger-agi-value"></span>
+                                </div>
+                                <div class="card-stat">
+                                    Health: <span id="challenger-health-value"></span>
+                                </div>
+                            </div>
+                            <div class="footer"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

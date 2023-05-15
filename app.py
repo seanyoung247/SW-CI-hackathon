@@ -24,7 +24,6 @@ def index():
         modifiers=MODIFIERS
     )
 
-
 # Socket two way communications between clients and server --
 
 # Game details
