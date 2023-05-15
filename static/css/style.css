@@ -1,10 +1,15 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html {
   height: 100%;
 }
 
 body {
-  background-image: url("../img/background\ theme.jpeg");
+  background-image: url("../img/background-theme.jpeg");
   background-size: cover;
   height: 100%;
 }
@@ -105,24 +110,68 @@ modal-dialog::part(modal-pane) {
 /*
  * Cards
  */
+#battle-ground {
+  display: flex;
+  flex-direction: row;
+}
 
-.card-body {
-  background-image: url("../img/background\ theme.jpeg");
-  background-repeat: no-repeat;
+.no-mans-land {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.player-card > .show {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 0;
+  height: 100%;
+}
+.player-card > .hide {
+  display: none;
+}
+.player-card {
+  height: 500px;
+  width: 300px;
+  color: #eccd05;
+}
+.jedi {
+  background-image: url('../img/cards/jedi-bg.jpg');
+  background-size: cover;
+}
+.sith {
+  background-image: url('../img/cards/sith-bg.jpg');
   background-size: cover;
 }
 
-.card-body button {
-  align-items: center;
-  text-align: center;
+.character-img {
+  align-self: center;
+  width: 200px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
-.card img {
+.player-stats {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  padding: 1em;
+}
+
+.card-stat {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer {
+  background-image: url('../img/cards/footer.png');
+  background-size: cover;
   width: 100%;
-  height: auto;
-  margin-bottom: 10px;
+  height: 75px;
 }
-
 /*
  * Chat box
  */
@@ -143,68 +192,4 @@ modal-dialog::part(modal-pane) {
 
 #chat-msg {
   flex-grow: 1;
-}
-/* Card styling */
-#card {
-    max-height: 200px;
-    max-width: 100px;
-}
-.player-card {
-    height: 190px;
-    width: 100px;
-}
-
-/*name*/
-#char-name-text{
-   color:rgb(212, 194, 27);
-   text-align: center;
-   font-size: 8px;
-   padding-top: 1px;
-   border-radius: 25px;
-   background: rgba(0,0,0,0.6);
-}
-/* background image*/
-.sith {
-    background-color: red;
-    background-image: url("images/sith-template.jpg");
-    padding-top: 0%;
-    padding-bottom: 0%;
-    background-size: cover;
-    margin: 0%;
-}
-
-.jedi {
-    background-color: red;
-    background-image: url("images/jedi-bg.jpg");
-    padding-top: 0%;
-    padding-bottom: 0%;
-    background-size: cover;
-    margin: 0%;
-}
-
-/*stats*/
-.stat{
-    font-size: 6px;
-    color: bisque;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: left;
-}
-
-/* character image */
-.character-img {
-height: 50%;
-width: 50%;
-border: 2px solid black;
-float: right;
-}
-/*footer*/
-.footer{
-    background-image: url("images/footer.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100px;
-    height: 21px;
-    position:fixed;
-    top: 180px;
 }
