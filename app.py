@@ -36,11 +36,18 @@ def get_objects():
         'modifiers': MODIFIERS
     })
 
-# Username admin
+# User admin
 @socketio.on('set-username')
 def set_username(message):
     # Add the new username to the session
     PLAYERS[request.sid]['username'] = message.get('username')
+
+
+@socketio.on('get-free-players')
+def get_free_players():
+    emit('free-players', {
+        'players': [v for _,v in PLAYERS.items() if v['challenger'] is None]
+    })
 
 
 # Character
