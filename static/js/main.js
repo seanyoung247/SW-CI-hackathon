@@ -29,6 +29,15 @@ import {
         character: '',
         health: 0,
     };
+    const startRoundBtn = document.getElementById('start-round-btn');
+
+    function addToChat(msg) {
+        const chatBox = document.getElementById('chat-box');
+        // Add the message
+        chatBox.value += `${msg}\n`;
+        // Scroll to bottom
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 
 
     function setCharacterCard(character, which) {
@@ -123,30 +132,36 @@ import {
         }
         setCharacterCard(challenger.character, 'challenger');
         alert(`You have a new challenger: ${challenger.username}`);
+        startRoundBtn.disabled = false;
+    });
+
+
+    startRoundBtn.addEventListener('click', e => {
+        // TEST!
+        doRound(user.character, objects.characters[user.character].weapon, 'strength');
+
+        startRoundBtn.disabled = true;
+
+        addToChat(`Waiting for other player...`);
     });
 
     /*
      * Fired when round has ended without a winner
      */
     onRoundEnd(msg => {
-        console.log('round complete');
-        console.log(msg);
+        const chatBox = document.getElementById('chat-box');
+        addToChat(`Round Complete!`);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        startRoundBtn.disabled = false;
     });
 
     /*
      * Fired when battle is complete and there is a winner
      */
     onBattleEnd(msg => {
-        console.log('Battle complete');
-        console.log(msg.winner, msg.players);
+        addToChat(`Battle Complete!`);
+        startRoundBtn.disabled = true;
     });
-
-
-    document.getElementById('start-round-btn').addEventListener('click', e => {
-        // TEST!
-        doRound(user.character, objects.characters[user.character].weapon, 'strength');
-    });
-
 
     /*
      * Sets user name
@@ -199,11 +214,7 @@ import {
      * Recieves messages from the current room or challenger
      */
     recieveChat(msg => {
-        const chatBox = document.getElementById('chat-box');
         const {username, data} = msg;
-        // Add the message
-        chatBox.value += `${username}\t - ${data}\n`;
-        // Scroll to bottom
-        chatBox.scrollTop = chatBox.scrollHeight;
+        addToChat(`${username}\t - ${data}`);
     });
 })()
