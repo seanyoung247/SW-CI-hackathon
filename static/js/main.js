@@ -30,6 +30,35 @@ import {
         health: 0,
     };
 
+
+    function setCharacterCard(character, which) {
+        const card = document.getElementById(`${which}-card`);
+        const visible = document.querySelector(`#${which}-card > div`);
+        const playerName = document.getElementById(`${which}-name`);
+        const playerImg = document.getElementById(`${which}-img`);
+        const strengthStat = document.getElementById(`${which}-str-value`);
+        const skillStat = document.getElementById(`${which}-ws-value`);
+        const agilityStat = document.getElementById(`${which}-agi-value`);
+        const healthStat = document.getElementById(`${which}-health-value`);
+
+        const charStats = objects.characters[character];
+
+        playerName.innerText = charStats.name;
+        playerImg.src = 'static/' + charStats.image;
+        strengthStat.innerText = parseInt(charStats.strength);
+        skillStat.innerText = parseInt(charStats.skill);
+        agilityStat.innerText = parseInt(charStats.agility);
+        healthStat.innerText = parseInt(charStats.health);
+
+        card.classList.remove('sith');
+        card.classList.remove('jedi');
+        card.classList.add(charStats.affiliation);
+
+        visible.classList.remove('hide');
+        visible.classList.add('show');
+    }
+
+
     function getRandomCards(deck) {
         for(let i = deck.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i+1));
@@ -92,7 +121,8 @@ import {
                 challenger.health = player.health;
             }
         }
-        // Indicate battle has started...
+        setCharacterCard(challenger.character, 'challenger');
+        alert(`You have a new challenger: ${challenger.username}`);
     });
 
     /*
@@ -118,7 +148,6 @@ import {
     });
 
 
-
     /*
      * Sets user name
      */
@@ -134,6 +163,7 @@ import {
         }
     });
 
+
     /*
      * Sets player chracter
      */
@@ -147,6 +177,8 @@ import {
             characterModal.show = false;
             // Build player modifier deck
             user.deck = getRandomCards(objects.modifiers);
+            // Fill out player card details
+            setCharacterCard(user.character, 'player')
         }
     });
 

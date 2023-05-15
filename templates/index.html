@@ -31,16 +31,16 @@
     </nav>
 
     <!-- Username modal -->
-    <!-- <modal-dialog id="username-modal" static show>
+    <modal-dialog id="username-modal" static show>
         <h3 slot="modal-header" id="start-user" class="text-center">What is your name young padawan?</h3>
         <div slot="modal-content" class="user-input d-flex justify-content-center">
             <input type="text" id="username" placeholder="Type your name">
             <button id="set-user">Next</button>
         </div>
-    </modal-dialog> -->
+    </modal-dialog>
 
     <!-- charactor modal-->
-    <!-- <modal-dialog id="character-modal" static>
+    <modal-dialog id="character-modal" static>
         <h3 slot="modal-header" id="start-character">Please pick your Character</h3>
         <div slot="modal-content" class="character-input d-flex justify-content-center">
             <select id="character-list">
@@ -52,7 +52,7 @@
             </select>
             <button id="set-character">Next</button>
         </div>
-    </modal-dialog> -->
+    </modal-dialog>
 
 
     <!-- <div class="container mt-0">
@@ -75,22 +75,22 @@
             <div id="battle-ground">
                 <!-- Player section -->
                 <div class="player-section">
-                    <div class="player-card sith">
-                        <div class="show">
-                            <h4 class="char-name"><span id="char-name">placeholder</span></h4>
-                            <img class="character-img" src="{{ url_for('static', filename='img/cards/characters/obi-wan.jpg') }}">
+                    <div id="player-card" class="player-card sith">
+                        <div class="hide">
+                            <h4 class="char-name"><span id="player-name">placeholder</span></h4>
+                            <img id="player-img" class="character-img" src="">
                             <div class="player-stats">
                                 <div class="card-stat">
-                                    Strength: <span id="str-value">20</span>
+                                    Strength: <span id="player-str-value"></span>
                                 </div>
                                 <div class="card-stat">
-                                    Weapson Skill: <span id="ws-value">12</span>
+                                    Weapson Skill: <span id="player-ws-value"></span>
                                 </div>
                                 <div class="card-stat">
-                                    Agility: <span id="agi-value">12</span>
+                                    Agility: <span id="player-agi-value"></span>
                                 </div>
                                 <div class="card-stat">
-                                    Health: <span id="health-value">12</span>
+                                    Health: <span id="player-health-value"></span>
                                 </div>
                             </div>
                             <div class="footer"></div>
@@ -105,22 +105,22 @@
                 
                 <!-- Challenger section -->
                 <div class="player-section">
-                    <div class="player-card sith">
+                    <div id="challenger-card" class="player-card sith">
                         <div class="hide">
-                            <h4 class="char-name"><span id="char-name">placeholder</span></h4>
-                            <img class="character-img" src="{{ url_for('static', filename='img/cards/characters/obi-wan.jpg') }}">
+                            <h4 class="char-name"><span id="challenger-name">placeholder</span></h4>
+                            <img id="challenger-img" class="character-img" src="">
                             <div class="player-stats">
                                 <div class="card-stat">
-                                    Strength: <span id="str-value"></span>
+                                    Strength: <span id="challenger-str-value"></span>
                                 </div>
                                 <div class="card-stat">
-                                    Weapson Skill: <span id="ws-value"></span>
+                                    Weapson Skill: <span id="challenger-ws-value"></span>
                                 </div>
                                 <div class="card-stat">
-                                    Agility: <span id="agi-value"></span>
+                                    Agility: <span id="challenger-agi-value"></span>
                                 </div>
                                 <div class="card-stat">
-                                    Health: <span id="health-value"></span>
+                                    Health: <span id="challenger-health-value"></span>
                                 </div>
                             </div>
                             <div class="footer"></div>
