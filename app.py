@@ -41,8 +41,6 @@ def get_objects():
 def set_username(message):
     # Add the new username to the session
     PLAYERS[request.sid]['username'] = message.get('username')
-    # Put the player in the waiting room
-    set_arena(PLAYERS[request.sid], 'waiting')
 
 
 # Character
@@ -208,11 +206,14 @@ def sock_connect():
         'health': 0,            # Player current health
         'round_stats': None,    # The Players calculated stats for the current round
     }
+    # Send connection handshake
     emit('connect', {
         'type': 'admin',
         'data': 'connected',
         'code': request.sid
     })
+    # Put the new player in the waiting room
+    set_arena(PLAYERS[request.sid], 'waiting')
 
 
 @socketio.on('disconnect')

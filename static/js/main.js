@@ -34,12 +34,16 @@ import {
         document.getElementById('player-challenge-code').innerText = code;
     }
 
-    onConnect(msg => showChallengeCode(msg.code));
-
-    /*
-     * Gets the current users challenge code from the server
-     */
-    getChallengeCode().then(showChallengeCode);
+    onConnect(msg => {
+        if (msg && msg.code) showChallengeCode(msg.code);
+        // Are there details to resend to the server?
+        if (!user.id) {
+            user.id = msg.code;
+        } else {
+            setUsername(user.username);
+            setCharacter(user.character);
+        }
+    });
 
     /*
      * Gets the game object definitions from the server
