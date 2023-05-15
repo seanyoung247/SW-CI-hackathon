@@ -1,15 +1,4 @@
 
-/* Removes the close button from the username modal */
-#username-modal::part(modal-close), 
-#character-modal::part(modal-close) {
-    display: none;
-    pointer-events: none;
-}
-
-modal-dialog::part(modal-pane) {
-  height: auto;
-}
-
 html {
   height: 100%;
 }
@@ -20,14 +9,12 @@ body {
   height: 100%;
 }
 
+/*
+ * Navbar
+ */
 .navbar-brand {
   font-size: 40px;
   font-weight: 700;
-}
-
-.container {
-  margin-top: 70px;
-  color: #cccccc;
 }
 
 .nav-link {
@@ -36,15 +23,47 @@ body {
   font-size: 20px;
 }
 
-.card-body {
-  background-image: url("../img/background\ theme.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
+/*
+ * Challenge code
+ */
+#challenge-btn {
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  color: #eccd05;
+  background: #333;
+  border: 1px solid #ffff;
 }
 
-.card-body button {
+#challenge-code {
+  width: fit-content;
   align-items: center;
+  justify-content: center;
+  color: #eccd05;
+  background: #333;
+  border: 1px solid #ffff;
+}
+
+.challengeCode {
   text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: yellow;
+}
+
+/*
+ * Modals
+ */
+
+/* Removes the close button from the username modal */
+#username-modal::part(modal-close), 
+#character-modal::part(modal-close) {
+    display: none;
+    pointer-events: none;
+}
+
+modal-dialog::part(modal-pane) {
+  height: auto;
 }
 
 .user {
@@ -83,31 +102,30 @@ body {
   border: 1px solid #eccd05;
 }
 
-#challenge-btn {
-  width: fit-content;
-  align-items: center;
-  justify-content: center;
-  color: #eccd05;
-  background: #333;
-  border: 1px solid #ffff;
+/*
+ * Cards
+ */
+
+.card-body {
+  background-image: url("../img/background\ theme.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-#challenge-code {
-  width: fit-content;
+.card-body button {
   align-items: center;
-  justify-content: center;
-  color: #eccd05;
-  background: #333;
-  border: 1px solid #ffff;
-}
-
-.challengeCode {
   text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  color: yellow;
 }
 
+.card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/*
+ * Chat box
+ */
 
 #chat {
   display: flex;
@@ -125,14 +143,4 @@ body {
 
 #chat-msg {
   flex-grow: 1;
-}
-
-.card img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.d-flex {
-  display: inline-block;
 }
