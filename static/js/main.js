@@ -99,7 +99,19 @@ import {
     }
 
     function winLose(id) {
+        const challengerCard = document.getElementById(`challenger-card`);
+        const challengerVisible = document.querySelector(`#challenger-card > div`);
 
+        if (user.id === id) {
+            alert('You WIN!');
+        } else {
+            alert('You Lose!');
+        }
+        challengerCard.classList.remove('jedi');
+        challengerCard.classList.add('sith');
+
+        challengerVisible.classList.remove('show');
+        challengerVisible.classList.add('hide');
     }
 
     onConnect(msg => {
