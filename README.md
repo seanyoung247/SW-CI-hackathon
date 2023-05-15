@@ -1,6 +1,6 @@
 # Jedi Battle Academy
 
-## You don't know the power of the dark side*
+## You don't know the power of the dark side *
 
 Jedi Battle Academy is Card Game / Roguelike where powerful warriors (from a galaxy far, far away) battle to the death in our arena.
 
