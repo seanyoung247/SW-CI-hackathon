@@ -1,7 +1,7 @@
 import { 
     setUsername, setCharacter, getChallengeCode, getObjects,    // Setup
+    onChallenge, onBattleEnd, onRoundEnd, onConnect,            // Events
     challengePlayer, endChallenge,                              // Challenges
-    onChallenge, onBattleEnd,                                   // Events
     sendChat, recieveChat,                                      // Chat
     doRound                                                     // Battle rounds
 } from './server.js';
@@ -29,14 +29,17 @@ import {
         health: 0,
     };
 
+    function showChallengeCode(code) {
+        user.id = code;
+        document.getElementById('player-challenge-code').innerText = code;
+    }
+
+    onConnect(msg => showChallengeCode(msg.code));
+
     /*
      * Gets the current users challenge code from the server
      */
-    getChallengeCode()
-        .then(code => {
-            user.id = code;
-            document.getElementById('player-challenge-code').innerText = code;
-        });
+    getChallengeCode().then(showChallengeCode);
 
     /*
      * Gets the game object definitions from the server
@@ -76,12 +79,33 @@ import {
                 challenger.health = player.health;
             }
         }
+        // Indicate battle has started...
     });
 
+    /*
+     * Fired when round has ended without a winner
+     */
+    onRoundEnd(msg => {
+        console.log('round complete');
+        console.log(msg);
+    });
+
+    /*
+     * Fired when battle is complete and there is a winner
+     */
+    onBattleEnd(msg => {
+        console.log('Battle complete');
+        console.log(msg.winner, msg.players);
+    });
+
+
+    // TEMPORARY FOR TESTING BATTLE ROUNDS
     document.getElementById('test').addEventListener('click', e => {
         // TEST
         doRound(user.character, objects.characters[user.character].weapon, 'strength');
     });
+
+
 
     /*
      * Sets user name

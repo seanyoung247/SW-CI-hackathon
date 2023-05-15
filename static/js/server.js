@@ -28,12 +28,14 @@ export function getChallengeCode() {
     });
 }
 
+
 /*
  * Character management
  */
 export function setCharacter(character) {
     socket.emit('set-character', {character});
 }
+
 
 /*
  * Challenges/Battles
@@ -48,17 +50,10 @@ export function challengePlayer(code) {
     });
 }
 
-export function onChallenge(callback) {
-    socket.on('challenge-accepted', callback);
-}
-
-export function onBattleEnd(callback) {
-    socket.on('battle-complete', callback);
-}
-
 export function endChallenge() {
     socket.emit('leave-challenge');
 }
+
 
 /*
  * Battle Rounds
@@ -66,6 +61,7 @@ export function endChallenge() {
 export function doRound(character, weapon, modifier) {
     socket.emit('do-round', {character, weapon, modifier});
 }
+
 
 /*
  * Chat messages
@@ -76,4 +72,24 @@ export function sendChat(message) {
 
 export function recieveChat(callback) {
     socket.on('chat-msg', callback);
+}
+
+
+/*
+ * Events
+ */
+export function onConnect(callback) {
+    socket.on('connect', callback);
+}
+
+export function onChallenge(callback) {
+    socket.on('challenge-accepted', callback);
+}
+
+export function onRoundEnd(callback) {
+    socket.on('round-complete', callback);
+}
+
+export function onBattleEnd(callback) {
+    socket.on('battle-complete', callback);
 }
