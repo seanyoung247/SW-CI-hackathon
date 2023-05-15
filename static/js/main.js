@@ -20,6 +20,7 @@ import {
         username: '',
         character: '',
         deck: null,
+        deckIdx: 0,
         health: 0,
     };
     // Stores the details of the remote challenger
@@ -37,6 +38,21 @@ import {
         chatBox.value += `${msg}\n`;
         // Scroll to bottom
         chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+
+    function updateHealth(player) {
+        let which = '';
+        let health = 0;
+        if (player.id === user.id) {
+            user.health = health = player.health;
+            which = 'player';
+        } else {
+            challenger.health = health = player.health;
+            which = 'challenger';
+        }
+        const healthEl = document.getElementById(`${which}-health-value`);
+        healthEl.innerText = parseInt(health);
     }
 
 
@@ -68,7 +84,8 @@ import {
     }
 
 
-    function getRandomCards(deck) {
+    function getRandomCards(mods) {
+        const deck = Object.keys(mods);
         for(let i = deck.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i+1));
             [deck[i], deck[j]] = [deck[j], deck[i]];
@@ -79,6 +96,10 @@ import {
     function showChallengeCode(code) {
         user.id = code;
         document.getElementById('player-challenge-code').innerText = code;
+    }
+
+    function winLose(id) {
+
     }
 
     onConnect(msg => {
@@ -130,6 +151,7 @@ import {
                 challenger.health = player.health;
             }
         }
+        user.deckIdx = 0;
         setCharacterCard(challenger.character, 'challenger');
         alert(`You have a new challenger: ${challenger.username}`);
         startRoundBtn.disabled = false;
@@ -137,8 +159,16 @@ import {
 
 
     startRoundBtn.addEventListener('click', e => {
-        // TEST!
-        doRound(user.character, objects.characters[user.character].weapon, 'strength');
+        doRound(
+            user.character, 
+            objects.characters[user.character].weapon, 
+            user.deck[user.deckIdx]
+        );
+        user.deckIdx++;
+        if (user.deckIdx >= user.deck.length) {
+            user.deck = getRandomCards(objects.modifiers);
+            user.deckIdx = 0;
+        }
 
         startRoundBtn.disabled = true;
 
@@ -152,6 +182,12 @@ import {
         const chatBox = document.getElementById('chat-box');
         addToChat(`Round Complete!`);
         chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Update health
+        for (const player of msg.players) {
+            updateHealth(player);
+        }
+
         startRoundBtn.disabled = false;
     });
 
@@ -160,6 +196,7 @@ import {
      */
     onBattleEnd(msg => {
         addToChat(`Battle Complete!`);
+        winLose(msg.winner);
         startRoundBtn.disabled = true;
     });
 
