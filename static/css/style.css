@@ -144,3 +144,67 @@ modal-dialog::part(modal-pane) {
 #chat-msg {
   flex-grow: 1;
 }
+/* Card styling */
+#card {
+    max-height: 200px;
+    max-width: 100px;
+}
+.player-card {
+    height: 190px;
+    width: 100px;
+}
+
+/*name*/
+#char-name-text{
+   color:rgb(212, 194, 27);
+   text-align: center;
+   font-size: 8px;
+   padding-top: 1px;
+   border-radius: 25px;
+   background: rgba(0,0,0,0.6);
+}
+/* background image*/
+.sith {
+    background-color: red;
+    background-image: url("images/sith-template.jpg");
+    padding-top: 0%;
+    padding-bottom: 0%;
+    background-size: cover;
+    margin: 0%;
+}
+
+.jedi {
+    background-color: red;
+    background-image: url("images/jedi-bg.jpg");
+    padding-top: 0%;
+    padding-bottom: 0%;
+    background-size: cover;
+    margin: 0%;
+}
+
+/*stats*/
+.stat{
+    font-size: 6px;
+    color: bisque;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+}
+
+/* character image */
+.character-img {
+height: 50%;
+width: 50%;
+border: 2px solid black;
+float: right;
+}
+/*footer*/
+.footer{
+    background-image: url("images/footer.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100px;
+    height: 21px;
+    position:fixed;
+    top: 180px;
+}

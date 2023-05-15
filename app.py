@@ -25,6 +25,9 @@ def index():
     )
 
 
+@app.route('/test_card')
+def test_card():
+    return render_template('card.html')
 # Socket two way communications between clients and server --
 
 # Game details
