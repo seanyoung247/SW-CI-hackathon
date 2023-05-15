@@ -11,26 +11,29 @@ def create_stat_sheet(player, character, weapon, modifier):
     weapon_stats = WEAPONS.get(base_stats['affiliation']).get(weapon)
     mod = MODIFIERS[modifier]['modifiers']
 
-    char_stats = {
-        'player': player['id'],
-        'health': player['health'],
-        'strength': base_stats['strength'],
-        'skill': base_stats['skill'],
-        'agility': base_stats['agility'],
-        'modifier': mod[1]
-    }
+    try:
+        char_stats = {
+            'player': player['id'],
+            'health': player['health'],
+            'strength': base_stats['strength'],
+            'skill': base_stats['skill'],
+            'agility': base_stats['agility'],
+            'modifier': mod[1]
+        }
 
-    # Balancing
-    # char_stats['agility'] = char_stats['agility'] * 1.2
-    # char_stats['strength'] = char_stats['strength'] * 0.8
+        # Balancing
+        # char_stats['agility'] = char_stats['agility'] * 1.2
+        # char_stats['strength'] = char_stats['strength'] * 0.8
 
-    # Add weapon modifiers to character stats:
-    if weapon_stats:
-        for mod in weapon_stats['modifiers']:
-            mod_stat = mod['stat']
-            char_stats[mod_stat] = char_stats[mod_stat] * mod['value']
+        # Add weapon modifiers to character stats:
+        if weapon_stats:
+            for weap in weapon_stats['modifiers']:
+                mod_stat = weap['stat']
+                char_stats[mod_stat] = char_stats[mod_stat] * weap['value']
 
-    char_stats[mod[0]['stat']] = char_stats[mod[0]['stat']] * mod[0]['value']
+        char_stats[mod[0]['stat']] = char_stats[mod[0]['stat']] * mod[0]['value']
+    except:
+        print(mod)
 
     return char_stats
 

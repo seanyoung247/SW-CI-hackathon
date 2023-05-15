@@ -112,6 +112,8 @@ import {
 
         challengerVisible.classList.remove('show');
         challengerVisible.classList.add('hide');
+
+        document.getElementById('challenge-code').value = '';
     }
 
     onConnect(msg => {
@@ -192,6 +194,7 @@ import {
      */
     onRoundEnd(msg => {
         const chatBox = document.getElementById('chat-box');
+        const oldHealth = user.health;
         addToChat(`Round Complete!`);
         chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -200,6 +203,13 @@ import {
             updateHealth(player);
         }
 
+        if (oldHealth === user.health) {
+            alert('You have dodged their attack!');
+        } else if (oldHealth < user.health) {
+            alert(`By the power of the force you have healed your wounds!\nYou gain ${parseInt(user.health-oldHealth)} health`);
+        } else {
+            alert(`You have been hit!\n${parseInt(oldHealth-user.health)}`);
+        }
         startRoundBtn.disabled = false;
     });
 
