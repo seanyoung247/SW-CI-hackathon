@@ -22,34 +22,13 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column">
     <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand text-warning" href="#">Jedi Battle Academy</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!--
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                            href="#about">About</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                            href="#characters">Characters</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                            href="#weapons">Weapons</a></li>
-                </ul>
-            </div>
-            -->
         </div>
     </nav>
-
-    <div class="container">
-        <h1>May the Force be with you!</h1>
-        <p class="text-light">In a galaxy far, far away, an epic battle of light and dark unfolds!</p>
-    </div>
 
     <!-- Username modal -->
     <modal-dialog id="username-modal" static show>
@@ -63,36 +42,49 @@
     <!-- charactor modal-->
     <modal-dialog id="character-modal" static>
         <h3 slot="modal-header" id="start-character">Please pick your Character</h3>
-        <div slot="modal-content" class="character-input">
+        <div slot="modal-content" class="character-input d-flex justify-content-center">
             <input type="text" id="characterName" placeholder="Choose your character">
             <button id="set-character">Setect Character</button>
         </div>
     </modal-dialog>
 
-    <div class="container">
-        <div class="row">
-            <p>
-            <div class="challengeCode">Your challenge code: <span id="player-challenge-code"></span>
+
+    <!-- <div class="container mt-0">
+        <h1>May the Force be with you!</h1>
+        <p class="text-light">In a galaxy far, far away, an epic battle of light and dark unfolds!</p>
+    </div> -->
+
+    <div class="container mt-0 d-flex flex-column flex-fill">
+        <div class="row justify-content-center">
+            <div class="challengeCode">
+                Your challenge code: 
+                <span id="player-challenge-code"></span>
             </div>
             <input type="text" id="challenge-code" placeholder="opponent challenge code">
             <button id="challenge-btn">Challenge Player</button>
-            </p>
-            <button id="test">test</button>
         </div>
-    </div>
 
-    <div class="container my-auto">
-        <form action="#" id="chat">
-            <textarea id="chat-box" rows="5" readonly></textarea>
-            <div class="chat-input">
-                <input type="text" id="chat-msg" placeholder="Type your message..">
-                <button type="submit" value="Send Message" class="btn btn-dark" >
-                    Submit
-                </button>
-            </div>
-        </form>
-    </div>
+        <div class="row flex-fill">
 
+
+
+            <button id="test">test</button>
+
+
+
+        </div>
+
+        <div class="row justify-content-center">
+            <form action="#" id="chat">
+                <textarea id="chat-box" rows="5" readonly></textarea>
+                <div class="chat-input">
+                    <input type="text" id="chat-msg" placeholder="Type your message..">
+                    <button type="submit" value="Send Message" class="btn btn-dark" >
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
 </body>
