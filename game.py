@@ -34,7 +34,6 @@ def resolve_round(players):
     """
     Takes player 1 and 2 stats and returns the battle results
     """
-
     for player in players:
         # Grab stats
         stats = player['round_stats']
