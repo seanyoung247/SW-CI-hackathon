@@ -19,6 +19,7 @@ import {
         id: '',
         username: '',
         character: '',
+        deck: null,
         health: 0,
     };
     // Stores the details of the remote challenger
@@ -28,6 +29,14 @@ import {
         character: '',
         health: 0,
     };
+
+    function getRandomCards(deck) {
+        for(let i = deck.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i+1));
+            [deck[i], deck[j]] = [deck[j], deck[i]];
+        }
+        return deck;
+    } 
 
     function showChallengeCode(code) {
         user.id = code;
@@ -103,9 +112,8 @@ import {
     });
 
 
-    // TEMPORARY FOR TESTING BATTLE ROUNDS
-    document.getElementById('test').addEventListener('click', e => {
-        // TEST
+    document.getElementById('start-round-btn').addEventListener('click', e => {
+        // TEST!
         doRound(user.character, objects.characters[user.character].weapon, 'strength');
     });
 
@@ -137,6 +145,8 @@ import {
         if (user.character) {
             setCharacter(user.character);
             characterModal.show = false;
+            // Build player modifier deck
+            user.deck = getRandomCards(objects.modifiers);
         }
     });
 
