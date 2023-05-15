@@ -129,6 +129,8 @@ modal-dialog::part(modal-pane) {
 
 .force-power {
     color:#eccd05;
+    margin-bottom: 20px;
+    text-align:center;
 }
 
 
