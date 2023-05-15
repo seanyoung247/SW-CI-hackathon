@@ -7,12 +7,22 @@ def create_stat_sheet(player, character, weapon, modifier):
     """ 
     Creates the final round stat and modifier stat to be sent to resolver function 
     """
-    char_stats = CHARACTERS[character]
-    weapon_stats = WEAPONS.get(char_stats['affiliation']).get(weapon)
+    base_stats = CHARACTERS[character]
+    weapon_stats = WEAPONS.get(base_stats['affiliation']).get(weapon)
+    mod = MODIFIERS[modifier]['modifiers']
+
+    char_stats = {
+        'player': player['id'],
+        'health': player['health'],
+        'strength': base_stats['strength'],
+        'skill': base_stats['skill'],
+        'agility': base_stats['agility'],
+        'modifier': mod[1]
+    }
 
     # Balancing
-    char_stats['agility'] = char_stats['agility'] * 1.2
-    char_stats['strength'] = char_stats['strength'] * 0.8
+    # char_stats['agility'] = char_stats['agility'] * 1.2
+    # char_stats['strength'] = char_stats['strength'] * 0.8
 
     # Add weapon modifiers to character stats:
     if weapon_stats:
@@ -20,19 +30,9 @@ def create_stat_sheet(player, character, weapon, modifier):
             mod_stat = mod['stat']
             char_stats[mod_stat] = char_stats[mod_stat] * mod['value']
 
-    # Retrieve the modifier in use
-    mod = MODIFIERS[modifier]['modifiers']
     char_stats[mod[0]['stat']] = char_stats[mod[0]['stat']] * mod[0]['value']
 
-
-    return {
-        'player': player['id'],
-        'health': player['health'],
-        'strength': char_stats['strength'],
-        'skill': char_stats['skill'],
-        'agility': char_stats['agility'],
-        'modifier': mod[1]
-    }
+    return char_stats
 
 
 def resolve_round(players):
