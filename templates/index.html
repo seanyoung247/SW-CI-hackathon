@@ -35,7 +35,7 @@
         <h3 slot="modal-header" id="start-user" class="text-center">What is your name young padawan?</h3>
         <div slot="modal-content" class="user-input d-flex justify-content-center">
             <input type="text" id="username" placeholder="Type your name">
-            <button id="set-user">Set Username</button>
+            <button id="set-user">Next</button>
         </div>
     </modal-dialog>
 
@@ -43,8 +43,15 @@
     <modal-dialog id="character-modal" static>
         <h3 slot="modal-header" id="start-character">Please pick your Character</h3>
         <div slot="modal-content" class="character-input d-flex justify-content-center">
-            <input type="text" id="characterName" placeholder="Choose your character">
-            <button id="set-character">Setect Character</button>
+            <!-- <input type="text" id="characterName" placeholder="Choose your character"> -->
+            <select id="character-list">
+
+                {% for key, value in characters.items() %}
+                    <option value="{{ key }}">{{ value.name }}</option>
+                {% endfor %}
+
+            </select>
+            <button id="set-character">Next</button>
         </div>
     </modal-dialog>
 
@@ -66,13 +73,21 @@
 
         <!-- Center Battle ground -->
         <div class="row flex-fill">
+            <div id="battle-ground" class="d-flex">
+                <div class="flex-fill">
+                    player
+                </div>
+    
 
-
-
-            <button id="test">test</button>
-
-
-
+                <div class="flex-fill">
+                    <button id="test">test</button>
+                </div>
+                
+    
+                <div class="flex-fill">
+                    challenger
+                </div>
+            </div>
         </div>
 
         <div class="row justify-content-center py-1">
