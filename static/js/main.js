@@ -1,8 +1,9 @@
 import { 
-    setUsername, setCharacter, getChallengeCode, getObjects,
-    challengePlayer, onChallenge, endChallenge,
-    sendChat, recieveChat,
-    doRound
+    setUsername, setCharacter, getChallengeCode, getObjects,    // Setup
+    onChallenge, onBattleEnd, onRoundEnd, onConnect,            // Events
+    challengePlayer, endChallenge,                              // Challenges
+    sendChat, recieveChat,                                      // Chat
+    doRound                                                     // Battle rounds
 } from './server.js';
 
 (()=>{
@@ -28,15 +29,25 @@ import {
         health: 0,
     };
 
-    /*
-     * Gets the current users challenge code from the server
-     */
-    getChallengeCode()
-        .then(code => {
-            user.id = code;
-            document.getElementById('player-challenge-code').innerText = code;
-        });
+    function showChallengeCode(code) {
+        user.id = code;
+        document.getElementById('player-challenge-code').innerText = code;
+    }
 
+    onConnect(msg => {
+        if (msg && msg.code) showChallengeCode(msg.code);
+        // Are there details to resend to the server?
+        if (!user.id) {
+            user.id = msg.code;
+        } else {
+            setUsername(user.username);
+            setCharacter(user.character);
+        }
+    });
+
+    /*
+     * Gets the game object definitions from the server
+     */
     getObjects()
         .then(msg => {
             objects.characters = msg.characters;
@@ -72,8 +83,33 @@ import {
                 challenger.health = player.health;
             }
         }
-        
+        // Indicate battle has started...
     });
+
+    /*
+     * Fired when round has ended without a winner
+     */
+    onRoundEnd(msg => {
+        console.log('round complete');
+        console.log(msg);
+    });
+
+    /*
+     * Fired when battle is complete and there is a winner
+     */
+    onBattleEnd(msg => {
+        console.log('Battle complete');
+        console.log(msg.winner, msg.players);
+    });
+
+
+    // TEMPORARY FOR TESTING BATTLE ROUNDS
+    document.getElementById('test').addEventListener('click', e => {
+        // TEST
+        doRound(user.character, objects.characters[user.character].weapon, 'strength');
+    });
+
+
 
     /*
      * Sets user name
@@ -83,7 +119,7 @@ import {
         user.username = document.getElementById('username').value;
         const characterModal = document.getElementById('character-modal');
 
-        if (user.username ) {
+        if (user.username) {
             setUsername(user.username );
             usernameModal.show = false;
             characterModal.show = true;
@@ -124,7 +160,7 @@ import {
         const chatBox = document.getElementById('chat-box');
         const {username, data} = msg;
         // Add the message
-        chatBox.value += `\n${username}\t - ${data}`;
+        chatBox.value += `${username}\t - ${data}\n`;
         // Scroll to bottom
         chatBox.scrollTop = chatBox.scrollHeight;
     });

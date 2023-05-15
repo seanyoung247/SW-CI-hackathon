@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
 from utils import set_arena, set_challenger, end_challenge
-from game import create_stat_sheet, resolve_round
+from game import create_stat_sheet, resolve_round, check_victory
 from defs import CHARACTERS, WEAPONS, MODIFIERS
 
 app = Flask(__name__)
@@ -36,13 +36,18 @@ def get_objects():
         'modifiers': MODIFIERS
     })
 
-# Username admin
+# User admin
 @socketio.on('set-username')
 def set_username(message):
     # Add the new username to the session
     PLAYERS[request.sid]['username'] = message.get('username')
-    # Put the player in the waiting room
-    set_arena(PLAYERS[request.sid], 'waiting')
+
+
+@socketio.on('get-free-players')
+def get_free_players():
+    emit('free-players', {
+        'players': [v for _,v in PLAYERS.items() if v['challenger'] is None]
+    })
 
 
 # Character
@@ -106,7 +111,7 @@ def challenge_player(message):
 def leave_challenge():
     # You're a do not person then, huh?
     player = PLAYERS[request.sid]
-    challenger = PLAYERS[player['challenger']]
+    challenger = player['challenger']
     end_challenge(player, challenger)
 
 
@@ -122,6 +127,7 @@ def do_round(message):
     
     if not all(keys in message for keys in ('character','weapon','modifier')):
         emit('round-failed', {'data': 'Missing required fields'})
+        return
 
     # Generate the round sheet for the current player
     player['round_stats'] = create_stat_sheet(
@@ -130,17 +136,55 @@ def do_round(message):
         message['weapon'],
         message['modifier'],
     )
-    
+
     # Do we have a round sheet for the challenger yet?
     if challenger['round_stats']:
         # Do fight
-        result = resolve_round(player, challenger)
-        # Check who won
-        # Broadcast results back to players
+        result = check_victory(resolve_round([player, challenger]))
+        # Clear round data
+        player['round_stats'] = None
+        challenger['round_stats'] = None
 
-        # If battle has been won, end the challenge 
-        # and return players to waiting room
+        if result: # There's a winner!
+            # Let the players know
+            emit('battle-complete', { 
+                'winner': result, 
+                'players': [
+                    {
+                        'id': player['id'],
+                        'username': player['username'],
+                        'character': player['character'],
+                        'health': player['health'],
+                    },
+                    {
+                        'id': challenger['id'],
+                        'username': challenger['username'],
+                        'character': challenger['character'],
+                        'health': challenger['health'],
+                    }
+                ]
+            }, broadcast=True)
+            # End the battle
+            end_challenge(player, challenger)
+            return
 
+        # Round complete, battle continues
+        emit('round-complete', {
+            'players': [
+                {
+                    'id': player['id'],
+                    'username': player['username'],
+                    'character': player['character'],
+                    'health': player['health'],
+                },
+                {
+                    'id': challenger['id'],
+                    'username': challenger['username'],
+                    'character': challenger['character'],
+                    'health': challenger['health'],
+                }
+            ]
+        }, broadcast=True)
 
     # Else wait for challenger
     return
@@ -169,7 +213,14 @@ def sock_connect():
         'health': 0,            # Player current health
         'round_stats': None,    # The Players calculated stats for the current round
     }
-    emit('recieve', {'type': 'admin', 'data': 'Connected'})
+    # Send connection handshake
+    emit('connect', {
+        'type': 'admin',
+        'data': 'connected',
+        'code': request.sid
+    })
+    # Put the new player in the waiting room
+    set_arena(PLAYERS[request.sid], 'waiting')
 
 
 @socketio.on('disconnect')
@@ -181,11 +232,6 @@ def sock_disconnect():
 
     del PLAYERS[request.sid]
     print('Client disconnected')
-
-
-@socketio.on('test-session')
-def test_session():
-    print(PLAYERS.get(request.sid).get('username'))
 
 
 if __name__ == '__main__':

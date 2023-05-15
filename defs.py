@@ -10,7 +10,7 @@ CHARACTERS = {
         'skill': 35,                        # Weapon Skill
         'agility': 20,                      # Agility (Defence)
         'vitality': 50,                     # The full health value
-        'health': 50,                       # Current health
+        'health': 100,                      # Current health
         'weapon': 'blue_sabre',             # Default Weapon
     },
     'yoda': {
@@ -21,7 +21,7 @@ CHARACTERS = {
         'skill': 25,
         'agility': 35,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'blue_sabre',
     },
     'luke_skywalker': {
@@ -32,7 +32,7 @@ CHARACTERS = {
         'skill': 27,
         'agility': 27,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'blue_sabre',
     },
     'mace_windu': {
@@ -43,7 +43,7 @@ CHARACTERS = {
         'skill': 28,
         'agility': 22,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'blue_sabre',
     },
     'qui_gon': {
@@ -54,7 +54,7 @@ CHARACTERS = {
         'skill': 25,
         'agility': 22,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'blue_sabre',
     },
     # Sith: Emperor Palpatine, Darth Vader, Darth Maul, Count Dooku, Kylo Ren
@@ -66,7 +66,7 @@ CHARACTERS = {
         'skill': 33,
         'agility': 20,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'red_sabre',
     },
     'darth_vader': {
@@ -77,7 +77,7 @@ CHARACTERS = {
         'skill': 23,
         'agility': 23,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'red_sabre',
     },
     'darth_maul': {
@@ -88,7 +88,7 @@ CHARACTERS = {
         'skill': 20,
         'agility': 20,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'red_double',
     },
     'count_dooku': {
@@ -99,7 +99,7 @@ CHARACTERS = {
         'skill': 35,
         'agility': 17,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'red_sabre',
     },
     'kylo_ren': {
@@ -110,7 +110,7 @@ CHARACTERS = {
         'skill': 22,
         'agility': 28,
         'vitality': 50,
-        'health': 50,
+        'health': 100,
         'weapon': 'red_sabre',
     },
 }
