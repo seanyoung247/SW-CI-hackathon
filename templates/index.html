@@ -81,14 +81,30 @@
 
                 <div class="d-flex flex-fill justify-content-center align-items-center">
                     <button id="start-round-btn">Start Round</button>
-                </div>
-                
+                </div>                
     
                 <div class="flex-fill">
                     challenger
                 </div>
             </div>
         </div>
+
+<!--Select Force Power-->
+        <div class="row">
+            <h3 class="force-power" id="force-power">Select Force Power for This Round</h3>
+            <div class="force-power d-flex justify-content-center">
+                <!-- <input type="text" id="forcePower" placeholder="Select Force Power to Use"> -->
+                <select id="modifiers-list">
+        
+                {% for key, value in modifiers.items() %}
+                <option value="{{ key }}">{{ value.name }}</option>
+                {% endfor %}
+        
+                </select>
+                <button id="force-power">Confirm</button>
+            </div>
+        </div>
+
 
         <div class="row justify-content-center py-1">
             <form action="#" id="chat">
@@ -106,3 +122,5 @@
 </body>
 
 </html>
+ 
+

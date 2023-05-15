@@ -124,6 +124,16 @@ modal-dialog::part(modal-pane) {
 }
 
 /*
+*Force Power Select
+*/
+
+.force-power {
+    color:#eccd05;
+}
+
+
+
+/*
  * Chat box
  */
 
@@ -144,3 +154,4 @@ modal-dialog::part(modal-pane) {
 #chat-msg {
   flex-grow: 1;
 }
+
