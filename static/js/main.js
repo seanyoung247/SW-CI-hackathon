@@ -131,8 +131,8 @@ import {
      */
     document.getElementById('set-character').addEventListener('click', e => {
         const characterModal = document.getElementById('character-modal'); 
-        // TEMPORARY. NEEDS TO BE SET BY CHARACTER CHOOSER UI
-        user.character = document.getElementById('characterName').value;
+        const characterSelect = document.getElementById('character-list');
+        user.character = characterSelect.value;
 
         if (user.character) {
             setCharacter(user.character);
